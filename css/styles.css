@@ -1,0 +1,41 @@
+ html, body, .container-table {
+    height: 100%;
+}
+#logout a {
+	color:#980747;
+}
+.nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover {
+    color: #fff;
+    background-color: #980747;
+}
+.header {	
+	height: 60px;
+	border-bottom: 1px solid #980747;
+}
+.header-right {
+	padding-top: 25px;
+}
+.header img {
+	width: 100%;
+	padding-top: 5px;
+}
+.container-table {
+    display: table;
+}
+.vertical-center-row {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.text-center:before, .text-center:after, .text-center>:first-child:before, .text-center>:first-child:after {
+    position:absolute;
+    width:30px; height: 30px;
+    border-color:#980747; /* or whatever colour */
+    border-style:solid; /* or whatever style */
+    content: ' ';
+}
+
+.text-center:before {top:0;left:0;border-width: 3px 0 0 3px}
+.text-center:after {top:0;right:0;border-width: 3px 3px 0 0}
+.text-center>:first-child:before {bottom:0;right:0;border-width: 0 3px 3px 0}
+.text-center>:first-child:after {bottom:0;left:0;border-width: 0 0 3px 3px}
