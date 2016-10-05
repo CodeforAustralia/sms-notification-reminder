@@ -1,11 +1,11 @@
 <?php
   session_start();
-  require('oauth2.php');
-  require('outlook2.php');
-  require('functions.php');
+  require('core/oauth2.php');
+  require('core/outlook2.php');
+  require('core/functions.php');
   
   $loggedIn = isset($_SESSION['access_token']) && !is_null($_SESSION['access_token']);
-  $redirectUri = 'https://sms-notification-service-carevaloq87.c9users.io/authorize.php';
+  $redirectUri = "https://" . $_SERVER['SERVER_NAME'] . '/core/authorize.php';
 ?>
 <html>
   <head>

@@ -1,4 +1,4 @@
-php-tutorial, https://github.com/jasonjoh/php-tutorial
+Outlook API Library, https://github.com/jasonjoh/php-tutorial
  
 Copyright (c) Microsoft Corporation 
 All rights reserved.  

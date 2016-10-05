@@ -3,7 +3,7 @@
   require_once('oauth2.php');
   require_once('outlook2.php');
   $auth_code = $_GET['code'];
-  $redirectUri = 'https://sms-notification-service-carevaloq87.c9users.io/authorize.php';
+  $redirectUri = "https://" . $_SERVER['SERVER_NAME'] . '/core/authorize.php';
 
   $tokens = oAuthService::getTokenFromAuthCode($auth_code, $redirectUri);
 

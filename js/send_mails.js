@@ -19,6 +19,7 @@ function create_reminder_object(calendar_obj, selected_calendar) {
     },
     function(data, status){
         console.log("Data: " + data + "\nStatus: " + status);
+        alert("The reminders were sent");
     });
     
 }

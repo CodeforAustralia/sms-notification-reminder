@@ -1,0 +1,49 @@
+[04-Oct-2016 00:06:25 UTC] Using custom GUID code.
+[04-Oct-2016 00:06:25 UTC] Doing POST
+[04-Oct-2016 00:06:27 UTC] curl_exec done.
+[04-Oct-2016 00:06:27 UTC] Request returned status 202
+[04-Oct-2016 00:06:27 UTC] Response: 
+[04-Oct-2016 00:06:27 UTC] Using custom GUID code.
+[04-Oct-2016 00:06:27 UTC] Doing POST
+[04-Oct-2016 00:06:28 UTC] curl_exec done.
+[04-Oct-2016 00:06:28 UTC] Request returned status 202
+[04-Oct-2016 00:06:28 UTC] Response: 
+[04-Oct-2016 02:19:18 UTC] Using custom GUID code.
+[04-Oct-2016 02:19:18 UTC] Doing POST
+[04-Oct-2016 02:19:19 UTC] curl_exec done.
+[04-Oct-2016 02:19:19 UTC] Request returned status 202
+[04-Oct-2016 02:19:19 UTC] Response: 
+[04-Oct-2016 02:19:19 UTC] Using custom GUID code.
+[04-Oct-2016 02:19:19 UTC] Doing POST
+[04-Oct-2016 02:19:20 UTC] curl_exec done.
+[04-Oct-2016 02:19:20 UTC] Request returned status 202
+[04-Oct-2016 02:19:20 UTC] Response: 
+[04-Oct-2016 02:19:20 UTC] Using custom GUID code.
+[04-Oct-2016 02:19:20 UTC] Doing POST
+[04-Oct-2016 02:19:21 UTC] curl_exec done.
+[04-Oct-2016 02:19:21 UTC] Request returned status 202
+[04-Oct-2016 02:19:21 UTC] Response: 
+[04-Oct-2016 02:19:21 UTC] Using custom GUID code.
+[04-Oct-2016 02:19:21 UTC] Doing POST
+[04-Oct-2016 02:19:22 UTC] curl_exec done.
+[04-Oct-2016 02:19:22 UTC] Request returned status 202
+[04-Oct-2016 02:19:22 UTC] Response: 
+[05-Oct-2016 02:13:05 UTC] Request body: grant_type=authorization_code&redirect_uri=http%3A%2F%2Fsms-notification-service-carevaloq87.c9users.io%2Fcore%2Fauthorize.php&scope=openid+offline_access+https%3A%2F%2Foutlook.office.com%2Fmail.read+https%3A%2F%2Foutlook.office.com%2Fmail.send+https%3A%2F%2Foutlook.office.com%2Fcalendars.read&client_id=72c1e641-25bd-4295-b8ae-40fb6b56c629&client_secret=iMc5ca2jZ8cahMC0hJVHHqy
+[05-Oct-2016 02:13:06 UTC] curl_exec done.
+[05-Oct-2016 02:13:06 UTC] Request returned status 400
+[05-Oct-2016 02:13:53 UTC] Request body: grant_type=authorization_code&code=M71e6ddcf-210d-f3c2-7aad-632df5dd7306&redirect_uri=https%3A%2F%2Fsms-notification-service-carevaloq87.c9users.io%2Fcore%2Fauthorize.php&scope=openid+offline_access+https%3A%2F%2Foutlook.office.com%2Fmail.read+https%3A%2F%2Foutlook.office.com%2Fmail.send+https%3A%2F%2Foutlook.office.com%2Fcalendars.read&client_id=72c1e641-25bd-4295-b8ae-40fb6b56c629&client_secret=iMc5ca2jZ8cahMC0hJVHHqy
+[05-Oct-2016 02:13:54 UTC] curl_exec done.
+[05-Oct-2016 02:13:54 UTC] Request returned status 200
+[05-Oct-2016 02:13:54 UTC] TOKEN RESPONSE:
+[05-Oct-2016 02:13:54 UTC]   token_type: Bearer
+[05-Oct-2016 02:13:54 UTC]   scope: https://outlook.office.com/Mail.Read https://outlook.office.com/Mail.Send https://outlook.office.com/Calendars.Read
+[05-Oct-2016 02:13:54 UTC]   expires_in: 3600
+[05-Oct-2016 02:13:54 UTC]   ext_expires_in: 0
+[05-Oct-2016 02:13:54 UTC]   access_token: EwAQA+l3BAAUo4xeBIbHjhBxWOFekj4Xy2fhaGQAAQpzlPYIbyUuxXL08I7jCafP9c57OR8zSpikUilIOqlarmhplfm0bWR4VZCOMFNm8m0rdfBOVbM7c64OBMAPU9CZgp1G6N+UuDozg4/wSM8NCcuZFRs5W9NwAyOFyTrC/WiK/3XwsOmYAaK36bxVOe5t2xRn+LdxeMbQlIcdKt1rX5Pw7RG2TVcmF3txevQ9ZDJFq29tB4PeEmTAx2J6jIi42a5klDO63rH8zXKMI0vTeDH2WD3tklAVm/FOJC6jbi4Wg+HJtYi12L7n0ER2SuioEUf6oC5JrHkC/NYvJZ0IEcynz1MxCX6jAe9sMba8IHW2x3coOwmCvdE2IIuKUUQDZgAACMXROB51Daf54AEJDtxaubWLRfd/KNPMcj39s5e/YDZ0RgkzpA/z2SIb41Tb4t1glaYtraCvgk0HJjx5GeZfoJ9y5kSPjmAtCtn7PV0IQvRQ8JzLZJCZEbgptvwGW7Bg7eBM99ktBxRpbRUzd4lgkHKWaWHlRzdYf5U5U3G+q/EPH4nO7qRRbW/aqHsl8TRM8iI3HEr+/uMin8cS12M6WTiGQU6CZi0Wn1ZjXmD3ZSi8xnKpyZpJ1gJbKU9Zd7Kj10BlJKD8Jvi0s0wHIBgBdkI+iXBoL5jXmIV5BnacLEQxvlhES7DapaVpC8U5p03veF/cTjsP0k6DQfm9STo2wDo+icfVRecymNDtYK39SmA4HpxhMdL3dddMuSRPKn2goAj8uFUDuOLnOmC2kh9GqXW7DEa2qMyecirRzRfaCQEtSUkl8HyUvz2l1c5xezTCsxbA+oBAeBjS+OuBmf6wmaHwv22IbZtZt1EbXcqlg44J4v46HBzLewb8Sh0KAav3OcQUPgzN8RJzj217SlxKrcJf7GzRKhY5F03O7rfnWwhHC4vXOgjTNRqztzEnU44pjipmGPvk+ylJkhnWAkqBfFqgWb3M8ecZdiKTGbEq3hI3BUmgVcswEFHDZKpnd70FtfbTrJp6xg8LPY4KAg==
+[05-Oct-2016 02:13:54 UTC]   refresh_token: MCclrwNMVuHahFhPd3hFYNCADjlsmehjNCLvc9GW7fesIjGkllkQTL8nccxwTeFEyvJJmfvDVRGq!7kTkT1l62JSsyLIIRpOChrWs3TI!gJ2cMmGK9RftkzxFSSTnsZDLi2uQHioHoqPTRgMZMAxR0HgTHX3dFYQ58TI*wJWNUaWZ2Pq2lssLtibGj1UQTIudNRz*xoYm2l!VmFMhf8sREOz*WluDdyJhDdR5**6DXBU4rZlFhY5BAqC8HivLbS1tm!pl1mVA3LTc9wiCxSiRj2UZU!S1r*MWmGeZL3St*CfbcZ7Lnm7zastd1Jr8JUiyxtB7cJJsU2RXKEvXtN49ZvPTJL4jbiTIVUN9PTtZehVzbZskmdHpL3C8G5!q2sQePBYO4KnVa0KvRw5KfEQJwp7iI3Xct97O91cdaENsL7vgvun!*DUSrzgYvwdUBHSe6AMO7A7gQb80iaXeDnDDhxARO*qfhU5F146J2PD*m7y1
+[05-Oct-2016 02:13:54 UTC]   id_token: eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6IjFMVE16YWtpaGlSbGFfOHoyQkVKVlhlV01xbyJ9.eyJ2ZXIiOiIyLjAiLCJpc3MiOiJodHRwczovL2xvZ2luLm1pY3Jvc29mdG9ubGluZS5jb20vOTE4ODA0MGQtNmM2Ny00YzViLWIxMTItMzZhMzA0YjY2ZGFkL3YyLjAiLCJhdWQiOiI3MmMxZTY0MS0yNWJkLTQyOTUtYjhhZS00MGZiNmI1NmM2MjkiLCJleHAiOjE0NzU3MjAwMzQsImlhdCI6MTQ3NTYzMzYzNCwiYXRfaGFzaCI6IjhCYXBGWUFQSVNPMEtidGJJRTlMWUEiLCJzdWIiOiJBQUFBQUFBQUFBQUFBQUFBQUFBQUFIUDRXRGdITmNZV0JNWDZxcVhZRWZNIiwidGlkIjoiOTE4ODA0MGQtNmM2Ny00YzViLWIxMTItMzZhMzA0YjY2ZGFkIn0.KTZitS7EF-jqzu8OYYaSG20RSXBKTCfhb3NUS5tO5L14ooEOxTS2GBZxXtwOb7cibxfZ_aciBEMsX3WdLwkwsW_k65Nf0Nk0wOgzxZK5iF4TbR2CpB4wzjwhh6NCBIb1hGE6WEnWWJJ5eppLl53P3s2bi3wOXwDe-Nk8dihdQ_x_oOMkAoGUbN2gE0p5jXMA55B-erOSvMqO18ZYxSDUn0v0Jvg5YAuIj7gOEeYB_8wVyh3uc-Fr3pB1ZK3I1OnOynADnWKL8oglRlTR33OuGABCaq2UBu2ytEh3-jxyKK2waqqpDc_NUZLG-MKx6-8hEmQOqDmFJawf6YS0WqxBsA
+[05-Oct-2016 02:13:54 UTC] Using custom GUID code.
+[05-Oct-2016 02:13:54 UTC] Doing GET
+[05-Oct-2016 02:13:56 UTC] curl_exec done.
+[05-Oct-2016 02:13:56 UTC] Request returned status 200
+[05-Oct-2016 02:13:56 UTC] Response: {"@odata.context":"https://outlook.office.com/api/v2.0/$metadata#Me(DisplayName,EmailAddress)","@odata.id":"https://outlook.office.com/api/v2.0/Users('00064000-8d81-a63b-0000-000000000000@84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa')","Id":"00064000-8d81-a63b-0000-000000000000@84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa","EmailAddress":"carevaloq87@hotmail.com","DisplayName":"Christian arevalo"}
