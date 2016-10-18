@@ -145,7 +145,7 @@
     }
 
     public static function getEventsByCalendarId($access_token, $user_email, $id) {
-      //date_default_timezone_set('Australia/Melbourne');
+      date_default_timezone_set('Australia/Melbourne');
       $day_after = date('Y-m-d', strtotime(' +1 day'));
       $today = date('Y-m-d');
       $getEventsParameters = array (
