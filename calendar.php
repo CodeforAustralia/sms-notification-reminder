@@ -2,6 +2,7 @@
   session_start();
   require('core/oauth2.php');
   require('core/outlook2.php');
+  require('core/email.php');
   require('core/functions.php');
   
   $loggedIn = isset($_SESSION['access_token']) && !is_null($_SESSION['access_token']);
@@ -14,10 +15,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <!-- <link href="css/font-awesome.min.css" rel="stylesheet"> -->
-    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/styles.css">
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
+    <script src="js/main.js"></script>
     <script src="js/send_mails.js"></script>
   </head>
   <body>
@@ -74,6 +76,7 @@
                 ?>
                 <div class="tab-pane <?= ($calendar_number == 1 ? 'active': '')?>" id="calendar-<?= $calendar_number ?>">
                   <button type="button" class="btn btn-success pull-right send_sms">Send SMS</button>
+                  <button type="button" class="btn btn-info pull-right refresh_page">Refresh</button>
                   <div class="table-responsive col-xs-12">
 
                     <table class="table" id="reminders">
@@ -91,9 +94,10 @@
                             $pased_subject  = parse_subject($event);
                             $event_type     = $pased_subject['event_type'];
                             $event_template = $pased_subject['event_template'];
-                            $phone          = $pased_subject['phone'];
+                            $phone          = trim($pased_subject['phone']);
                             $number_chars   = strlen($event_template);
-                            $calendar_obj["calendar-" . $calendar_number][] = array('template' => $event_template, 'phone' => $phone);
+                            $calendar_obj["calendar-" . $calendar_number][] = 
+                              array('event_type' => $event_type, 'template' => $event_template, 'phone' => $phone);
                             if($event_type != ''):
                           ?>
                           <tr>
@@ -116,6 +120,11 @@
             ?>
           </div>
       </div>
+      <footer class="footer">
+        <div class="container">
+          <p class="text-muted"><i class="fa fa-github" aria-hidden="true"></i> If you find an issue or just want to give us your feedback, please use this link. (<a href="https://github.com/CodeforAustralia/sms-notification-reminder/issues" target="_blank">Link</a>)</p>
+        </div>
+      </footer>
       <div class="hidden loading-box">
         <i class="fa fa-refresh fa-spin" style="font-size:200px;color:#980747"></i>  
       </div>

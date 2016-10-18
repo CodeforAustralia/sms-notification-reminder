@@ -145,15 +145,15 @@
     }
 
     public static function getEventsByCalendarId($access_token, $user_email, $id) {
-      date_default_timezone_set('Australia/Melbourne');
+      //date_default_timezone_set('Australia/Melbourne');
       $day_after = date('Y-m-d', strtotime(' +1 day'));
       $today = date('Y-m-d');
       $getEventsParameters = array (
         "\$select" => "Subject,Start,Location, BodyPreview",
         // Only return Subject, Start, and End fields
-        "startdatetime" => $day_after . "T00:00:00Z",
+        "startdatetime" => $today . "T13:00:00Z",
         // Sort by Start, oldest first
-        "enddatetime" => $day_after . "T23:59:00Z" 
+        "enddatetime" => $day_after . "T12:59:00Z" 
       );
 
       $getEventsUrl = self::$outlookApiUrl."/Me/Calendars/" . $id . "/calendarview?".http_build_query($getEventsParameters); 
@@ -163,25 +163,23 @@
     public static function sendEmail($access_token, $user_email, $subject, $content, $recipient = '') {
       
       if ($recipient != '') {
-        $pcsms = "@pcsms.com.au";
-        $to_address = $recipient . $pcsms;
         $getEventsUrl = self::$outlookApiUrl."/Me/sendmail/";      //https://outlook.office.com/api/v2.0/me/sendmail
         $payload = '{
                       "Message": {
                         "Subject": "' . $subject . '",
                         "Body": {
-                          "ContentType": "Text",
+                          "ContentType": "HTML",
                           "Content": "' .  $content . '"
                         },
                         "ToRecipients": [
                           {
                             "EmailAddress": {
-                              "Address": "' . $to_address . '"
+                              "Address": "' . $recipient . '"
                             }
                           }
                         ]
                       },
-                      "SaveToSentItems": "false"
+                      "SaveToSentItems": "true"
                     }';
         return self::makeApiCall($access_token, $user_email, "POST", $getEventsUrl, $payload);
       }

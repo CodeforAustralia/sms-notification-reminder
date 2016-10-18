@@ -21,7 +21,7 @@ function parse_subject($event_in_calendar) {
                 $output['event_template'] = court_reminder_template($event_info, $location, $date_time);
                 break;
             case 'VAR':
-                $output['event_type'] = "VLA Apointment Reminder";
+                $output['event_type'] = "VLA Appointment Reminder";
                 $output['event_template'] = vla_apoint_reminder_template($event_info, $location, $date_time);
                 break;
             case 'SAR':
