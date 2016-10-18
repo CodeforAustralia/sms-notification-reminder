@@ -11,7 +11,7 @@ if (isset($_POST['reminders'])) {
     $rows = array();
     
     $pcsms = "@pcsms.com.au";
-    $subject = 'VLA SMS Notification Report';
+    $subject = 'VLA SMS Notification Report ' . date("Y-m-d");
     
     foreach($_POST['reminders'] as $key => $value) {
         $data[] = OutlookService::sendEmail($_SESSION['access_token'], $_SESSION['user_email'], '', $value['template'], $value['phone'] . $pcsms);
