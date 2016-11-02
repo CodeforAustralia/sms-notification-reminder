@@ -39,7 +39,11 @@ function parse_subject($event_in_calendar) {
             case 'CBM':
                 $output['event_type'] = "Call back message";
                 $output['event_template'] = call_back_message_template($event_info, $date_time);
-                break;          
+                break;
+            case 'RAR':
+                $output['event_type'] = "Ringwood Appointment Reminder";
+                $output['event_template'] = ringwood_appointment_reminder_template($event_info, $location, $date_time);
+                break;
             default:
                 # code...
                 $output['event_type'] = "";
@@ -153,4 +157,11 @@ function call_back_message_template($event_info, $date_time) {
     $date   = $date_time['date'];
     $time   = $date_time['time'];
     return "Hi, I rang you on " . $date . " but there was no answer. Could you please call " . $name . ", Victoria Legal Aid on " . $phone . ".";   
+}
+
+function ringwood_appointment_reminder_template($event_info, $location, $date_time) {
+    $phone  = $event_info[0];
+    $date   = $date_time['date'];
+    $time   = $date_time['time'];
+    return "You have an appointment on " . $date . " at " . $time . " with Victoria Legal Aid. Location of appointment is at " . $location . " To change call us on 9259 5444.";  
 }
