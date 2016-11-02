@@ -39,5 +39,5 @@ Thumbs.db
 # CUSTOM FILES #
 ################
 
-email.txt
-oauth2.php
+/**/emails.txt
+/**/oauth2.php
