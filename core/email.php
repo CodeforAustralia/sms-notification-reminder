@@ -39,4 +39,15 @@
           $template = str_replace("*|ROWS|*", $rows, $template);
           return $template;
       }
+      
+      /**
+       * [Get emails from file with a JSON object]
+       * @return [array]       [email and name addresses]
+       */
+      public static function getEmailsFromFile() {
+        $email_path = $_SERVER['DOCUMENT_ROOT'] . "/include_files/emails.txt";
+        $file       = file_get_contents($email_path);
+        $emails     = json_decode($file);
+        return $emails;
+      }
   }

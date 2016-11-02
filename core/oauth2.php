@@ -11,7 +11,9 @@
                                    "offline_access",
                                    "https://outlook.office.com/mail.read",
                                    "https://outlook.office.com/mail.send",
-                                   "https://outlook.office.com/calendars.read");
+                                   "https://outlook.office.com/calendars.read",
+                                   "https://outlook.office.com/calendars.read.shared",
+                                   "https://outlook.office.com/calendars.readwrite.shared");
 
     public static function getLoginUrl($redirectUri) {
       // Build scope string. Multiple scopes are separated

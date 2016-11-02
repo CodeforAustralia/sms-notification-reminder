@@ -160,6 +160,29 @@
       return self::makeApiCall($access_token, $user_email, "GET", $getEventsUrl);
     }
     
+    public static function getEventsByEmail($access_token, $user_email, $calendar_email) {
+      date_default_timezone_set('Australia/Melbourne');
+      //Check if is Friday to support appointments on Monday
+      if (date("l") == 'Friday'){
+        $day_after = date('Y-m-d', strtotime(' +3 day'));
+        $today = date('Y-m-d', strtotime(' +2 day'));
+      } else {
+        $day_after = date('Y-m-d', strtotime(' +1 day'));
+        $today = date('Y-m-d');
+      }
+      
+      $getEventsParameters = array (
+        "\$select" => "Subject,Start,Location, BodyPreview",
+        // Only return Subject, Start, and End fields
+        "startdatetime" => $today . "T13:00:00Z",
+        // Sort by Start, oldest first
+        "enddatetime" => $day_after . "T12:59:00Z" 
+      );
+
+      $getEventsUrl = self::$outlookApiUrl."/Users/" . $calendar_email . "/calendarview?".http_build_query($getEventsParameters); 
+      return self::makeApiCall($access_token, $user_email, "GET", $getEventsUrl);
+    }
+    
     public static function sendEmail($access_token, $user_email, $subject, $content, $recipient = '') {
       
       if ($recipient != '') {
@@ -194,6 +217,24 @@
         //$events[] = $event['value'];
         $events = array_merge($events, $event['value']);
         $result[$calendar['Name']] = $event['value']; //name of the calendar     
+      }
+      return $result;
+    }
+    
+    public static function getEventsByEmails() {
+      require('email.php');
+      $email_obj = new Email();
+      $events = array();
+      $result = array();
+      foreach($email_obj->getEmailsFromFile() as $calendar_email) {
+        $calendars_email = self::getEventsByEmail($_SESSION['access_token'], $_SESSION['user_email'], $calendar_email->email);
+        if ($calendars_email['errorNumber']){
+          //var_dump("Dont have enough permisions");
+        } else {
+          //var_dump($calendars_email);
+            $events = array_merge($events, $calendars_email['value']);
+            $result[$calendar_email->name] = $calendars_email['value']; //name of the calendar     
+        }
       }
       return $result;
     }

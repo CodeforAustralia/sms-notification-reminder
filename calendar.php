@@ -2,11 +2,11 @@
   session_start();
   require('core/oauth2.php');
   require('core/outlook2.php');
-  require('core/email.php');
   require('core/functions.php');
   
   $loggedIn = isset($_SESSION['access_token']) && !is_null($_SESSION['access_token']);
   $redirectUri = "https://" . $_SERVER['SERVER_NAME'] . '/core/authorize.php';
+  
 ?>
 <html>
   <head>
@@ -44,6 +44,9 @@
           die();
         }
         $events = OutlookService::getEventsByCalendars($_SESSION['access_token'], $_SESSION['user_email'], $calendars['value']);
+        $events = $result;
+        $events = OutlookService::getEventsByEmails();
+
     ?>
       <!-- User is logged in, do something here -->
       <div class="header">
