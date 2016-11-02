@@ -6,7 +6,7 @@
   
   $loggedIn = isset($_SESSION['access_token']) && !is_null($_SESSION['access_token']);
   $redirectUri = "https://" . $_SERVER['SERVER_NAME'] . '/core/authorize.php';
-  
+  $ownCalendars = false; //Access own calendars or access calendars by emails in source
 ?>
 <html>
   <head>
@@ -43,9 +43,14 @@
           header("Location: logout.php");
           die();
         }
-        $events = OutlookService::getEventsByCalendars($_SESSION['access_token'], $_SESSION['user_email'], $calendars['value']);
-        $events = $result;
-        $events = OutlookService::getEventsByEmails();
+	
+	if($ownCalendars) {
+		/** Own calendars **/
+		$events = OutlookService::getEventsByCalendars($_SESSION['access_token'], $_SESSION['user_email'], $calendars['value']);
+	} else {	
+		/** Calendars by emails in source[file] **/
+		$events = OutlookService::getEventsByEmails();
+	}
 
     ?>
       <!-- User is logged in, do something here -->
