@@ -93,7 +93,8 @@
                           <th class="col-xs-2">Event Type</th>
                           <th class="col-xs-6">SMS template</th>
                           <th class="col-xs-2"># of chars</th>
-                          <th class="col-xs-2">Client Number</th>
+                          <th class="col-xs-2">Name</th>
+                          <th class="col-xs-2">P. Number</th>
                           <!-- <th class="col-xs-1"></th> -->
                         </tr>
                       </thead>                         
@@ -103,6 +104,7 @@
                             $event_type     = $pased_subject['event_type'];
                             $event_template = $pased_subject['event_template'];
                             $phone          = trim($pased_subject['phone']);
+                            $name           = trim($pased_subject['client_name']);
                             $number_chars   = strlen($event_template);
                             $calendar_obj["calendar-" . $calendar_number][] = 
                               array('event_type' => $event_type, 'template' => $event_template, 'phone' => $phone);
@@ -112,6 +114,7 @@
                             <td><?= $event_type ?></td>
                             <td><?= $event_template ?></td>
                             <td><span class="badge"><?= $number_chars ?></span></td>
+                            <td><span><?= $name ?></span></td>
                             <td><span><?= $phone ?></span></td>
                             <!-- <td><input type="checkbox" /></td> -->
                           </tr>

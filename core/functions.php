@@ -14,7 +14,8 @@ function parse_subject($event_in_calendar) {
         $event_type = trim($event[0]);
         $event_info = explode(",", $event[1]);
         $phone      = end($event_info);
-        $output['phone'] = $phone;
+        $output['client_name']  = "-";
+        $output['phone']        = $phone;
         switch ($event_type) {
             case 'CR':
                 $output['event_type'] = "Court Reminder";
@@ -41,7 +42,8 @@ function parse_subject($event_in_calendar) {
                 $output['event_template'] = call_back_message_template($event_info, $date_time);
                 break;
             case 'RAR':
-                $output['event_type'] = "Ringwood Appointment Reminder";
+                $output['event_type']     = "Ringwood Appointment Reminder";
+                $output['client_name']           = $event_info[0];
                 $output['event_template'] = ringwood_appointment_reminder_template($event_info, $location, $date_time);
                 break;
             default:
@@ -160,7 +162,6 @@ function call_back_message_template($event_info, $date_time) {
 }
 
 function ringwood_appointment_reminder_template($event_info, $location, $date_time) {
-    $phone  = $event_info[0];
     $date   = $date_time['date'];
     $time   = $date_time['time'];
     return "You have an appointment on " . $date . " at " . $time . " with Victoria Legal Aid. Location of appointment is at " . $location . " To change call us on 9259 5444.";  
