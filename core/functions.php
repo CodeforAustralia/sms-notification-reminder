@@ -7,56 +7,22 @@
  */
 function parse_subject($event_in_calendar) {
     $event      = explode("-", $event_in_calendar['Subject']);
+    $body       = $event_in_calendar['BodyPreview'];
     $location   = $event_in_calendar['Location']['DisplayName'];
     $date_time  = pase_outlook_date($event_in_calendar['Start']['DateTime']);
     $output     = array();
-    if (isset($event[0]) && isset($event[1])) {
-        $event_type = trim($event[0]);
-        $event_info = explode(",", $event[1]);
+    if (isset($event[0])) {
+        $event_info = explode(",", $event[0]);
         $phone      = end($event_info);
-        $output['client_name']  = "-";
+        //Clients name = $event[1] and Receptionist name = $event[2]
+        $output['client_name']  = (isset($event[1]) && isset($event[2]) ? $event[1]: "-" );
         $output['phone']        = $phone;
-        switch ($event_type) {
-            case 'CR':
-                $output['event_type'] = "Court Reminder";
-                $output['event_template'] = court_reminder_template($event_info, $location, $date_time);
-                break;
-            case 'VAR':
-                $output['event_type'] = "VLA Appointment Reminder";
-                $output['event_template'] = vla_apoint_reminder_template($event_info, $location, $date_time);
-                break;
-            case 'SAR':
-                $output['event_type'] = "Specialist appointment reminder";
-                $output['event_template'] = specialist_appointment_reminder_template($event_info, $location, $date_time);
-                break;
-            case 'RSI':
-                $output['event_type'] = "Reminder to supply info/docs";
-                $output['event_template'] = supply_info_reminder_template($event_info, $location, $date_time);
-                break;
-            case 'RBB':
-                $output['event_type'] = "Reminder of barrister briefed";
-                $output['event_template'] = barrister_briefed_reminder_template($event_info, $location, $date_time);
-                break;
-            case 'CBM':
-                $output['event_type'] = "Call back message";
-                $output['event_template'] = call_back_message_template($event_info, $date_time);
-                break;
-            case 'RAR':
-                $output['event_type']     = "Ringwood Appointment Reminder";
-                $output['client_name']           = $event_info[0];
-                $output['event_template'] = ringwood_appointment_reminder_template($event_info, $location, $date_time);
-                break;
-            default:
-                # code...
-                $output['event_type'] = "";
-                $output['event_template'] = "";
-                break;
-        }
+        $output = $output + find_matter_type_in_body($body ,$event_info, $location, $date_time);
     }
     return $output;
 }
 
-function pase_event($body) {
+function find_matter_type_in_body($body ,$event_info, $location, $date_time) {
     $output = array();
     switch(true){
         case stristr($body,'(CR)'):
@@ -85,7 +51,6 @@ function pase_event($body) {
             break;
         case stristr($body,'(RAR)'):
             $output['event_type']     = "Ringwood Appointment Reminder";
-            $output['client_name']    = $event_info[0];
             $output['event_template'] = ringwood_appointment_reminder_template($event_info, $location, $date_time);
             break;
         default:
