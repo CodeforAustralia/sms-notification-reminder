@@ -146,8 +146,15 @@
 
     public static function getEventsByCalendarId($access_token, $user_email, $id) {
       date_default_timezone_set('Australia/Melbourne');
-      $day_after = date('Y-m-d', strtotime(' +1 day'));
-      $today = date('Y-m-d');
+      //Check if is Friday to support appointments on Monday
+      if (date("l") == 'Friday'){
+        $day_after = date('Y-m-d', strtotime(' +3 day'));
+        $today = date('Y-m-d', strtotime(' +2 day'));
+      } else {
+        $day_after = date('Y-m-d', strtotime(' +1 day'));
+        $today = date('Y-m-d');
+      }
+      
       $getEventsParameters = array (
         "\$select" => "Subject,Start,Location, BodyPreview",
         // Only return Subject, Start, and End fields
