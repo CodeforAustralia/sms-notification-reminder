@@ -56,6 +56,47 @@ function parse_subject($event_in_calendar) {
     return $output;
 }
 
+function pase_event($body) {
+    $output = array();
+    switch(true){
+        case stristr($body,'(CR)'):
+            $output['event_type'] = "Court Reminder";
+            $output['event_template'] = court_reminder_template($event_info, $location, $date_time);
+            break;
+        case stristr($body,'(VAR)'):
+            $output['event_type'] = "VLA Appointment Reminder";
+            $output['event_template'] = vla_apoint_reminder_template($event_info, $location, $date_time);
+            break;
+        case stristr($body,'(SAR)'):
+            $output['event_type'] = "Specialist appointment reminder";
+            $output['event_template'] = specialist_appointment_reminder_template($event_info, $location, $date_time);
+            break;
+        case stristr($body,'(RSI)'):
+            $output['event_type'] = "Reminder to supply info/docs";
+            $output['event_template'] = supply_info_reminder_template($event_info, $location, $date_time);
+            break;
+        case stristr($body,'(RBB)'):
+            $output['event_type'] = "Reminder of barrister briefed";
+            $output['event_template'] = barrister_briefed_reminder_template($event_info, $location, $date_time);
+            break;
+        case stristr($body,'(CBM)'):
+            $output['event_type'] = "Call back message";
+            $output['event_template'] = call_back_message_template($event_info, $date_time);
+            break;
+        case stristr($body,'(RAR)'):
+            $output['event_type']     = "Ringwood Appointment Reminder";
+            $output['client_name']    = $event_info[0];
+            $output['event_template'] = ringwood_appointment_reminder_template($event_info, $location, $date_time);
+            break;
+        default:
+            # code...
+            $output['event_type'] = "";
+            $output['event_template'] = "";
+            break;
+    }
+    return $output;
+}
+
 /**
  * Extract date information from outlook event object
  * @param  String $outlook_date date in outlook format
