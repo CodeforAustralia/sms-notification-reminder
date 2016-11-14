@@ -17,7 +17,7 @@ function parse_subject($event_in_calendar) {
         //Clients name = $event[1] and Receptionist name = $event[2]
         $output['client_name']  = (isset($event[1]) && isset($event[2]) ? $event[1]: "-" );
         $output['phone']        = $phone;
-        $output = $output + find_matter_type_in_body($body ,$event_info, $location, $date_time);
+        $output = find_matter_type_in_body($body ,$event_info, $location, $date_time) + $output;
     }
     return $output;
 }
@@ -50,6 +50,7 @@ function find_matter_type_in_body($body ,$event_info, $location, $date_time) {
             $output['event_template'] = call_back_message_template($event_info, $date_time);
             break;
         case stristr($body,'(RAR)'):
+            $output['client_name']    = (sizeof($event_info) > 1 ? $event_info[0]: "-") ;
             $output['event_type']     = "Ringwood Appointment Reminder";
             $output['event_template'] = ringwood_appointment_reminder_template($event_info, $location, $date_time);
             break;
