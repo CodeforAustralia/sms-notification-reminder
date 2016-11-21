@@ -6,7 +6,7 @@
  * @return Array                     Event type, template and client number 
  */
 function parse_subject($event_in_calendar) {
-    $event      = explode("-", $event_in_calendar['Subject']);
+    $event      = explode("#", $event_in_calendar['Subject']);
     $body       = $event_in_calendar['BodyPreview'];
     $location   = $event_in_calendar['Location']['DisplayName'];
     $date_time  = pase_outlook_date($event_in_calendar['Start']['DateTime']);
@@ -50,7 +50,7 @@ function find_matter_type_in_body($body ,$event_info, $location, $date_time) {
             $output['event_template'] = call_back_message_template($event_info, $date_time);
             break;
         case stristr($body,'(RAR)'):
-            $output['client_name']    = (sizeof($event_info) > 1 ? $event_info[0]: "-") ;
+            $output['client_name']    = (sizeof($event_info) > 1 ? $event_info[0]: "-");
             $output['event_type']     = "Ringwood Appointment Reminder";
             $output['event_template'] = ringwood_appointment_reminder_template($event_info, $location, $date_time);
             break;
@@ -171,5 +171,5 @@ function call_back_message_template($event_info, $date_time) {
 function ringwood_appointment_reminder_template($event_info, $location, $date_time) {
     $date   = $date_time['date'];
     $time   = $date_time['time'];
-    return "You have an appointment on " . $date . " at " . $time . " with Victoria Legal Aid. Location of appointment is at " . $location . " To change call us on 9259 5444.";  
+    return "You have an appointment on " . $date . " at " . $time . " with Victoria Legal Aid. Location of appointment is at " . $location . ". To change call us on 9259 5444.";  
 }
