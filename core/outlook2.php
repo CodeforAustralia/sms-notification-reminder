@@ -190,6 +190,23 @@
       return self::makeApiCall($access_token, $user_email, "GET", $getEventsUrl);
     }
     
+    public static function getEventsByEmailAndDate($access_token, $user_email, $calendar_email, $date) {
+      date_default_timezone_set('Australia/Melbourne');
+     
+      $day_before = date('Y-m-d',strtotime($date . ' -1 day'));
+      
+      $getEventsParameters = array (
+        "\$select" => "Subject,Start,Location, BodyPreview",
+        // Only return Subject, Start, and End fields
+        "startdatetime" => $day_before . "T13:00:00Z",
+        // Sort by Start, oldest first
+        "enddatetime" => $date . "T12:59:00Z" 
+      );
+
+      $getEventsUrl = self::$outlookApiUrl."/Users/" . $calendar_email . "/calendarview?".http_build_query($getEventsParameters); 
+      return self::makeApiCall($access_token, $user_email, "GET", $getEventsUrl);
+    }
+    
     public static function sendEmail($access_token, $user_email, $subject, $content, $recipient = '') {
       
       if ($recipient != '') {

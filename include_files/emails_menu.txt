@@ -1,0 +1,15 @@
+{
+    "items" : [{
+    	"email": "Civil.Law.Appointments@vla.vic.gov.au",
+    	"name": "Civil Law Appointments"
+    }, {
+    	"email": "CJAEAdmin@vla.vic.gov.au",
+    	"name": "CJAE"
+    }, {
+    	"email": "Ringwood@vla.vic.gov.au",
+    	"name": "Ringwood"
+    }, {
+    	"email": "frcringwood@vla.vic.gov.au",
+    	"name": "Ringwood Appointments"
+    }]
+}

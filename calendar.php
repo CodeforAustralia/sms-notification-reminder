@@ -133,7 +133,7 @@
       </div>
       <footer class="footer">
         <div class="container">
-          <p class="text-muted"><i class="fa fa-github" aria-hidden="true"></i> If you find an issue or just want to give us your feedback, please use this link. (<a href="https://github.com/CodeforAustralia/sms-notification-reminder/issues/" target="_blank">Link</a>)</p>
+          <p class="text-muted">Check our new interface <a href="/v2">here</a> <i class="fa fa-github" aria-hidden="true"></i> If you find an issue or just want to give us your feedback, please use this link. (<a href="https://github.com/CodeforAustralia/sms-notification-reminder/issues/" target="_blank">Link</a>)</p>
         </div>
       </footer>
       <div class="hidden loading-box">
