@@ -16,7 +16,7 @@ function parse_subject($event_in_calendar) {
         $phone      = end($event_info);
         //Clients name = $event[1] and Receptionist name = $event[2]
         $output['client_name']  = (isset($event[1]) && isset($event[2]) ? $event[1]: "-" );
-        $output['phone']        = $phone;
+        $output['phone']        = sanitize_phone($phone);
         $output = find_matter_type_in_body($body ,$event_info, $location, $date_time) + $output;
     }
     return $output;
@@ -54,6 +54,11 @@ function find_matter_type_in_body($body ,$event_info, $location, $date_time) {
             $output['event_type']     = "Ringwood Appointment Reminder";
             $output['event_template'] = ringwood_appointment_reminder_template($event_info, $location, $date_time);
             break;
+        case stristr($body,'(CAR)'):
+            $output['client_name']    = (sizeof($event_info) > 1 ? $event_info[0]: "-");
+            $output['event_type']     = "Criminal Law Appointment Reminder";
+            $output['event_template'] = criminal_law_appointment_reminder_template($event_info, $location, $date_time);
+            break;
         default:
             # code...
             $output['event_type'] = "";
@@ -86,7 +91,7 @@ function pase_outlook_date($outlook_date) {
  */
 function court_reminder_template($event_info, $location, $date_time) {
     $name   = $event_info[0];
-    $phone  = $event_info[1];
+    $phone  = sanitize_phone($event_info[1]);
     $date   = $date_time['date'];
     $time   = $date_time['time'];
     return "Hi, reminder to attend ". $location . " on " . $date . " at " . $time . ". Any questions call " . $name . ", Victoria Legal Aid on "  . $phone . ".";
@@ -101,7 +106,7 @@ function court_reminder_template($event_info, $location, $date_time) {
  */
 function vla_apoint_reminder_template($event_info, $location, $date_time) { 
     $name   = $event_info[0];
-    $phone  = $event_info[1];
+    $phone  = sanitize_phone($event_info[1]);
     $date   = $date_time['date'];
     $time   = $date_time['time'];
     return "Hi, reminder to attend your appointment with Victoria Legal Aid at " . $location . " on " . $date . " at " . $time . ". To change, call " . $name . " on " . $phone . ".";
@@ -117,7 +122,7 @@ function vla_apoint_reminder_template($event_info, $location, $date_time) {
 function specialist_appointment_reminder_template($event_info, $location, $date_time) {
     $name   = $event_info[0];
     $name_2 = $event_info[1];
-    $phone  = $event_info[2];
+    $phone  = sanitize_phone($event_info[2]);
     $date   = $date_time['date'];
     $time   = $date_time['time'];
     return "Reminder of your appointment with " . $name . " on " . $date . " at " . $time . " at " . $location . ". Any questions call " . $name_2 . ", Victoria Legal Aid on " . $phone . ".";
@@ -133,7 +138,7 @@ function specialist_appointment_reminder_template($event_info, $location, $date_
 function supply_info_reminder_template($event_info, $location, $date_time) {
     $reason = $event_info[0];
     $name   = $event_info[1];
-    $phone  = $event_info[2];
+    $phone  = sanitize_phone($event_info[2]);
     $date   = $date_time['date'];
     return "Hi, reminder to " . $reason . " " . $date . ". Any questions call " . $name . ", Victoria Legal Aid on " . $phone . ".";
 }
@@ -148,7 +153,7 @@ function supply_info_reminder_template($event_info, $location, $date_time) {
 function barrister_briefed_reminder_template($event_info, $location, $date_time) {
     $name   = $event_info[0];
     $name_2 = $event_info[1];
-    $phone  = $event_info[2];
+    $phone  = sanitize_phone($event_info[2]);
     $date   = $date_time['date'];
     $time   = $date_time['time'];
     return "Hi, reminder to meet your barrister " . $name . " at " . $location . " Court " . $time . " " . $date . ". Any questions call " . $name_2 . ", Victoria Legal Aid on " . $phone . ".";
@@ -162,14 +167,42 @@ function barrister_briefed_reminder_template($event_info, $location, $date_time)
  */
 function call_back_message_template($event_info, $date_time) {
     $name   = $event_info[0];
-    $phone  = $event_info[1];
+    $phone  = sanitize_phone($event_info[1]);
     $date   = $date_time['date'];
     $time   = $date_time['time'];
     return "Hi, I rang you on " . $date . " but there was no answer. Could you please call " . $name . ", Victoria Legal Aid on " . $phone . ".";   
 }
 
+/**
+ * Ringwood appointment reminders template
+ * @param  Array $event_info  
+ * @param  String $date_time  Date and time of the event
+ * @return String             Ringwood appointment reminder message template with all the information provided
+ */
 function ringwood_appointment_reminder_template($event_info, $location, $date_time) {
     $date   = $date_time['date'];
     $time   = $date_time['time'];
     return "You have an appointment on " . $date . " at " . $time . " with Victoria Legal Aid. Location of appointment is at " . $location . ". To change call us on 9259 5444.";  
+}
+
+/**
+ * Criminal law appointment reminder template
+ * @param  Array $event_info  [admin's phone]
+ * @param  String $date_time  Date and time of the event
+ * @return String             Ringwood appointment reminder message template with all the information provided
+ */
+function criminal_law_appointment_reminder_template($event_info, $location, $date_time) {
+    $phone  = sanitize_phone($event_info[0]);
+    $date   = $date_time['date'];
+    $time   = $date_time['time'];
+    return "You have an appointment on " . $date . " at " . $time . " with Victoria Legal Aid. Location of appointment is at " . $location . ". To change call us on " . $phone . ".";  
+}
+
+/**
+ * Sanitize phone numbers   
+ * @param  String $phone    [String with phone number]
+ * @return String           [String without special characters or white spaces]
+ */
+function sanitize_phone($phone){
+    return preg_replace('/[^0-9.]+/', '', $phone);
 }
