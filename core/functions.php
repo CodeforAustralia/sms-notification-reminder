@@ -17,6 +17,7 @@ function parse_subject($event_in_calendar) {
         //Clients name = $event[1] and Receptionist name = $event[2]
         $output['client_name']  = (isset($event[1]) && isset($event[2]) ? $event[1]: "-" );
         $output['phone']        = sanitize_phone($phone);
+        $output['appt_date']    = $date_time['date'] . " " . $date_time['time'];
         $output = find_matter_type_in_body($body ,$event_info, $location, $date_time) + $output;
     }
     return $output;

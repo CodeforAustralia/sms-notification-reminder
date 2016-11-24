@@ -8,41 +8,35 @@
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 		<link rel="stylesheet" href="css/datepicker/bootstrap-datepicker.css">
 		<link rel="stylesheet" href="css/modal.css">
-		<link rel="stylesheet" href="css/styles-layout-2.css">
+		<link rel="stylesheet" href="css/styles.css">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/0.7.2/mustache.min.js"></script>
 		<script src="js/bootstrap-datepicker.min.js"></script>
 		<script src="js/main.js"></script>
-		<script id="messages-template" type="text/template">
-			<div class="row cards-header">
-				<div class="col-xs-3">
-					<h4>Send To</h4>
-				</div>	
-				<div class="col-xs-7">					
-					<h4>Appointment Information</h4>
-				</div>
-				<div class="col-xs-1 check-all">
-					<span>Select All </span><br>
-					<input type="checkbox" onClick="toggle(this)">
-				</div>	
-			</div>
+		<script id="messages-template" type="text/template">			
 			{{#cards}}
-				<div class="row card-container">
-					<div class="col-xs-12 card-info">
-						<div class="col-xs-3 client-info">
-						  	<span>{{name}}</span><br>
-					  		<span>{{mobile}}</span>
-						</div>	
-						<div class="col-xs-7 card-message">
-						  	<span><b>{{type}}</b></span><br>
-						  	<span>{{message}}</span>
-						</div>
-						<div class="col-xs-1 checkbox-container">
-							<input type="checkbox" name="message-check" class="message-check">
-						</div>	
-					</div>	
-				</div>	
+				<div class="event-card">				    
+		  			<div class="col-xs-1">
+				  		<span class="glyphicon glyphicon-user hidden-sm hidden-md hidden-lg"></span> <span class="hidden-xs"><strong>Name</strong></span>
+			  		</div>
+		  			<div class="col-xs-4">
+				  		<span>{{name}}</span>
+			  		</div>
+		  			<div class="col-xs-1">
+				  		<span class="glyphicon glyphicon-phone hidden-sm hidden-md hidden-lg"></span> <span class="hidden-xs"><strong>Phone</strong></span>
+			  		</div>
+		  			<div class="col-xs-3">
+				  		<span>{{mobile}}</span>
+			  		</div>
+			  		<hr>
+					<div class="container-fluid">
+					  	<span><strong>Event Type</strong></span> <span>{{type}}</span>
+					</div>
+					<div class="container-fluid">
+					  	<span>{{message}}</span>
+					</div>
+				</div>
 			{{/cards}}
 		</script>
 		<script id="menu-template" type="text/template">			
@@ -75,8 +69,7 @@
 
 		    <div class="col-sm-9 main-section">
 		    	<div class="top-buttons">
-					<button type="submit" class="btn btn-info" id="refresh_button">Refresh</button>
-					<button type="submit" class="btn btn-success" id="send_button" disabled>Send</button>
+					<button type="submit" class="btn btn-success" id="send_button">Send</button>
 				</div>
 				<hr>
 				<div class="events-container">

@@ -112,8 +112,10 @@
 								                            <table class='table' id='reminders' style='font-size: 13px;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;'>
 																<thead>
 																	<tr>
-																		<th style='width: 180px;'>Event Type</th>
-																		<th>SMS template</th>
+																		<th>Name</th>
+																		<th>Number</th>
+																		<th>Type</th>
+																		<th>Date</th>
 																	</tr>
 																</thead>
 																<tbody>

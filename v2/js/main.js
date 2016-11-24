@@ -6,6 +6,7 @@ $(function() {
 	init_calendar();
 	click_calendars();
 	send_messages();
+	refresh_page();
 });
 
 function get_current_date() {
@@ -56,8 +57,9 @@ function get_events(){
 	  .done(function( data ) {
 	    var cards = JSON.parse(data);
 	    if (cards.session_error === undefined) {
-		    set_events(cards);
 	    	render_cards(cards);
+	    	events = cards;
+	    	set_events();
 			hide_loader();
 	    } else {
 	    	window.location = "/";
@@ -70,6 +72,10 @@ function render_cards(cards) {
     template = $("#messages-template").html();
 
 	var html = Mustache.to_html(template, cards);
+	
+	if (Object.keys(cards).length < 1){
+		html = "<h2 class='watermark-appt'>No appointments on this day</h2>";
+	}
 
 	$(targetContainer).html(html);
 }
@@ -96,21 +102,25 @@ function render_menu(items){
 	$(targetContainer).html(html);
 }
 
-function set_events(obj) {
-	events = obj.cards;
-	if (events === undefined){
-		$("#send_button").attr("disabled","disabled")
-	} else {
-		$("#send_button").removeAttr("disabled","disabled")
-	}
+function set_events() {
+	$(".message-check").on("change",function(event) {
+		enable_disable_send_button();
+	});
 }
 
+function enable_disable_send_button(){
+	if (Object.keys(selected_messages()).length > 0){
+		$("#send_button").removeAttr("disabled","disabled");
+	} else {
+		$("#send_button").attr("disabled","disabled");
+	}
+}
 function send_messages() {
 	$("#send_button").on('click', function() {
 		show_loader();
 		$.post("/services/send_mails.php",
 	    {
-	        messages : events
+	        messages : choose_messages()
 	    },
 	    function(data, status){
 	        console.log("Data: " + data + "\nStatus: " + status);
@@ -119,3 +129,36 @@ function send_messages() {
 	    });
 	});
 }
+
+function choose_messages() {
+	var sm = selected_messages();
+	var messages_to_send = [];
+	for(key in sm){
+		messages_to_send.push(events.cards[sm[key]])
+	}
+	return messages_to_send;
+}
+
+
+function toggle(source) {
+  var checkboxes = document.getElementsByName('message-check');
+  for(var i=0, n=checkboxes.length;i<n;i++) {
+    checkboxes[i].checked = source.checked;
+  }
+  enable_disable_send_button();
+}
+
+function refresh_page(){
+	$("#refresh_button").on('click', function() {
+		get_events();
+	});
+}
+
+function selected_messages() {
+	var messages_pos = [];
+	$('.message-check:checked').each(function() {
+       messages_pos.push($('.message-check').index( $(this) ));
+  	});
+  	return messages_pos;
+}
+

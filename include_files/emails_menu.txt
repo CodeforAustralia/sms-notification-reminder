@@ -11,5 +11,8 @@
     }, {
     	"email": "frcringwood@vla.vic.gov.au",
     	"name": "Ringwood Appointments"
+    }, {
+    	"email": "18.CriminalLaw.Advice.Apps@vla.vic.gov.au",
+    	"name": "Criminal Law Advice Apps"
     }]
 }

@@ -38,6 +38,8 @@
     <?php
       }
       else {
+        header("Location: /v2");
+        die();
         $calendars = OutlookService::getCalendars($_SESSION['access_token'], $_SESSION['user_email']);
         if (isset($calendars['errorNumber']) && $calendars['errorNumber'] > 400) {
           header("Location: logout.php");

@@ -1,0 +1,139 @@
+$grey: #f5f5f5;
+$dark_grey: #e3e3e3;
+$black: #000;
+$light_black: #333;
+$wine: #961b4b;
+$white: #fff;
+$blue: #49b9e0;
+
+header {  
+  ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background-color: $light_black;
+  }
+
+  li {
+      float: left;
+  }
+  li:last-child {
+      float: right;
+  }
+
+  li a {
+      display: block;
+      color: $white;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+  }
+
+  span{
+    font-size: 20px;
+    color: $white;    
+    line-height: 48px;
+    margin-left: 20px;
+    text-transform: uppercase;
+  }
+
+  .active {
+      background-color: $wine;
+  }
+}
+.main-section{
+
+  hr {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  .card-info{
+    font-size: 0.9em;
+    .card-message{
+      padding-left: 5px;
+    }
+  }
+  .client-info {    
+    padding-top: 5px;
+    /*color:  $blue;*/
+    padding-left: 0px;
+  }
+  .card-container{    
+      padding: 7px 0;
+      border-bottom: 1px solid $dark_grey;
+  }
+  
+  .card-container:nth-child(even) {
+      background: $grey;
+  }
+
+  .check-all{
+    padding-left: 5px;
+    font-size: 0.8em;
+  }
+
+  .icon-label{
+    font-size: 7px;
+  }
+
+  .top-buttons{
+    padding-top: 10px;
+    text-align: right;
+  }
+  
+  .watermark-appt{
+    opacity: 0.5;
+    text-align: center;
+    margin-top: 20%;
+  }
+
+}
+
+/* Set height of the grid so .sidenav can be 100% (adjust if needed) */
+.row.content {height: 680px}
+
+/* Set gray background color and 100% height */
+.sidenav {
+  background-color: $grey;
+  height: 100%;
+
+  #current-calendar{
+    text-align: center;  
+  }
+
+  #calendar {
+    text-align: center;
+    .datepicker {
+      display: inline-block;
+    }
+  }
+}
+
+.footer {    
+    bottom: 0;
+    width: 100%;
+    height: 60px;
+    background-color: #f5f5f5;
+
+	.container {
+	    padding-right: 15px;
+	    padding-left: 15px;
+	    margin-right: auto;
+	    margin-left: auto;
+
+	    .text-muted {
+		    margin: 20px 0;
+		}
+	}
+}
+
+/* On small screens, set height to 'auto' for sidenav and grid */
+@media screen and (max-width: 767px) {
+  .sidenav {
+    height: auto;
+    padding: 15px;
+  }
+  .row.content {height: auto;}
+}

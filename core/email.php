@@ -18,8 +18,11 @@
           
           foreach($rows as $row){
               $output .= "<tr style='border-bottom:1px solid #EAEAEA'>
-    						<td style='mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;'>" . $row[0] . "</td>
-    						<td style='mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;'>" . $row[1] . "</td>
+    						<td style='mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;padding-right: 10px;'>" . $row[0] . "</td>
+    						<td style='mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;padding-right: 10px;'>" . $row[1] . "</td>
+    						<td style='mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;padding-right: 10px;'>" . $row[2] . "</td>
+    						<td style='mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;padding-right: 10px;'>" . $row[3] . "</td>
+    						<td style='mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;padding-right: 10px;'>" . $row[4] . "</td>
     					  </tr>";
           }
           return $output;

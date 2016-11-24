@@ -28,7 +28,7 @@ if (isset($_POST['reminders'])) {
 } elseif (isset($_POST['messages'])) {
     foreach($_POST['messages'] as $message){
         $data[] = OutlookService::sendEmail($_SESSION['access_token'], $_SESSION['user_email'], '', $message['message'], $message['mobile'] . $pcsms);
-        $rows[] = array($message['type'], $message['message']);
+        $rows[] = array($message['name'], $message['mobile'], $message['type'], $message['appt_date']);
     }
     $email_data = array('subject' => $subject, 'rows' => $rows);
     $email_obj = new Email();

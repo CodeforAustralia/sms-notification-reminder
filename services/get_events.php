@@ -9,18 +9,21 @@
       foreach ($events as $calendar_key => $calendar_events) { 
             if (is_array($calendar_events)) {
                 foreach($calendar_events as $event) {
-                    $pased_subject  = parse_subject($event);
-                    $event_type     = $pased_subject['event_type'];
-                    $event_template = $pased_subject['event_template'];
-                    $phone          = trim($pased_subject['phone']);
-                    $name           = trim($pased_subject['client_name']);
-                    if ($event_type != '' && $event_template != '' && $phone != '') {
-                        $events_output['cards'][] = array(
-                                'name' => $name,
-                                'mobile' => $phone,
-                                'message' => $event_template,
-                                'type' => $event_type
-                            );   
+                    if (!stristr($event['Subject'],'cancel') && !stristr($event['Subject'],'reschedule')) {
+                        $pased_subject  = parse_subject($event);
+                        $event_type     = $pased_subject['event_type'];
+                        $event_template = $pased_subject['event_template'];
+                        $phone          = trim($pased_subject['phone']);
+                        $name           = trim($pased_subject['client_name']);
+                        if ($event_type != '' && $event_template != '' && $phone != '') {
+                            $events_output['cards'][] = array(
+                                    'name' => $name,
+                                    'mobile' => $phone,
+                                    'message' => $event_template,
+                                    'type' => $event_type,
+                                    'appt_date' => $pased_subject['appt_date']
+                                );   
+                        }
                     }
                 }
             }
