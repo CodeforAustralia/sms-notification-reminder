@@ -8,7 +8,7 @@
     $data = array();
     $rows = array();
     
-    $pcsms = "@pcsms.com.au";
+    $pcsms = "@e2s.pcsms.com";
     $subject = 'VLA SMS Notification Report ' . date("Y-m-d");
     
 if (isset($_POST['reminders'])) {
