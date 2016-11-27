@@ -27,6 +27,7 @@ function find_matter_type_in_body($body ,$event_info, $location, $date_time) {
     $output = array();
     switch(true){
         case stristr($body,'(CR)'):
+            $output['client_name'] = (sizeof($event_info) > 3 ? $event_info[2]: "-");
             $output['event_type'] = "Court Reminder";
             $output['event_template'] = court_reminder_template($event_info, $location, $date_time);
             break;
