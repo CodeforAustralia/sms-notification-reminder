@@ -7,7 +7,7 @@
  */
 function parse_subject($event_in_calendar) {
     $event      = explode("#", $event_in_calendar['Subject']);
-    $body       = $event_in_calendar['BodyPreview'];
+    $body       = $event_in_calendar['Body']['Content'];
     $location   = $event_in_calendar['Location']['DisplayName'];
     $date_time  = pase_outlook_date($event_in_calendar['Start']['DateTime']);
     $output     = array();
@@ -58,7 +58,8 @@ function find_matter_type_in_body($body ,$event_info, $location, $date_time) {
             break;
         case stristr($body,'(CAR)'):
             $output['client_name']    = (sizeof($event_info) > 1 ? $event_info[0]: "-");
-            $output['event_type']     = "Criminal Law Appointment Reminder";
+            $output['phone']          = sanitize_phone($event_info[1]);
+	    $output['event_type']     = "Criminal Law Appointment Reminder";
             $output['event_template'] = criminal_law_appointment_reminder_template($event_info, $location, $date_time);
             break;
         default:
@@ -194,7 +195,7 @@ function ringwood_appointment_reminder_template($event_info, $location, $date_ti
  * @return String             Ringwood appointment reminder message template with all the information provided
  */
 function criminal_law_appointment_reminder_template($event_info, $location, $date_time) {
-    $phone  = sanitize_phone($event_info[0]);
+    $phone  = sanitize_phone(end($event_info));
     $date   = $date_time['date'];
     $time   = $date_time['time'];
     return "You have an appointment on " . $date . " at " . $time . " with Victoria Legal Aid. Location of appointment is at " . $location . ". To change call us on " . $phone . ".";  

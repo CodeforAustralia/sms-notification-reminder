@@ -179,7 +179,7 @@
       }
       
       $getEventsParameters = array (
-        "\$select" => "Subject,Start,Location, BodyPreview",
+        "\$select" => "Subject,Start,Location, BodyPreview, Body",
         // Only return Subject, Start, and End fields
         "startdatetime" => $today . "T13:00:00Z",
         // Sort by Start, oldest first
@@ -196,7 +196,7 @@
       $day_before = date('Y-m-d',strtotime($date . ' -1 day'));
       
       $getEventsParameters = array (
-        "\$select" => "Subject,Start,Location, BodyPreview",
+        "\$select" => "Subject,Start,Location, BodyPreview, Body",
         // Only return Subject, Start, and End fields
         "startdatetime" => $day_before . "T13:00:00Z",
         // Sort by Start, oldest first
