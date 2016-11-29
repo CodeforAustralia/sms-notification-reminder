@@ -56,13 +56,13 @@ function get_events(){
   	$.post( data_url, { date: selected_date, email: selected_menu })
 	  .done(function( data ) {
 	    var cards = JSON.parse(data);
-	    if (cards.session_error === undefined) {
+	    if (cards.error === undefined ) {
 	    	render_cards(cards);
 	    	events = cards;
 	    	set_events();
 			hide_loader();
 	    } else {
-	    	window.location = "/";
+	    	window.location = "/logout.php";
 	    }
 	  });
 }
