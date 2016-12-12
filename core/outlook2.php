@@ -112,8 +112,8 @@
         "\$select" => "Subject,ReceivedDateTime,From",
         // Sort by ReceivedDateTime, newest first
         "\$orderby" => "ReceivedDateTime DESC",
-        // Return at most 10 results
-        "\$top" => "10"
+        // Return at most 20 results
+        "\$top" => "20"
       );
 
       $getMessagesUrl = self::$outlookApiUrl."/Me/MailFolders/Inbox/Messages?".http_build_query($getMessagesParameters);
@@ -127,8 +127,8 @@
         "\$select" => "Subject,Start,End, BodyPreview",
         // Sort by Start, oldest first
         "\$orderby" => "Start/DateTime",
-        // Return at most 10 results
-        "\$top" => "10"
+        // Return at most 20 results
+        "\$top" => "20"
       );
 
       $getEventsUrl = self::$outlookApiUrl."/Me/Events?".http_build_query($getEventsParameters);
@@ -160,7 +160,9 @@
         // Only return Subject, Start, and End fields
         "startdatetime" => $today . "T13:00:00Z",
         // Sort by Start, oldest first
-        "enddatetime" => $day_after . "T12:59:00Z" 
+        "enddatetime" => $day_after . "T12:59:00Z",
+        // Return at most 20 results
+        "\$top" => "20"
       );
 
       $getEventsUrl = self::$outlookApiUrl."/Me/Calendars/" . $id . "/calendarview?".http_build_query($getEventsParameters); 
@@ -183,7 +185,9 @@
         // Only return Subject, Start, and End fields
         "startdatetime" => $today . "T13:00:00Z",
         // Sort by Start, oldest first
-        "enddatetime" => $day_after . "T12:59:00Z" 
+        "enddatetime" => $day_after . "T12:59:00Z" ,
+        // Return at most 20 results
+        "\$top" => "20"
       );
 
       $getEventsUrl = self::$outlookApiUrl."/Users/" . $calendar_email . "/calendarview?".http_build_query($getEventsParameters); 
@@ -200,7 +204,9 @@
         // Only return Subject, Start, and End fields
         "startdatetime" => $day_before . "T13:00:00Z",
         // Sort by Start, oldest first
-        "enddatetime" => $date . "T12:59:00Z" 
+        "enddatetime" => $date . "T12:59:00Z" ,
+        // Return at most 20 results
+        "\$top" => "20"
       );
 
       $getEventsUrl = self::$outlookApiUrl."/Users/" . $calendar_email . "/calendarview?".http_build_query($getEventsParameters); 
