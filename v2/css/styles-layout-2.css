@@ -51,6 +51,13 @@ header .active {
   opacity: 0.5;
   text-align: center;
   margin-top: 20%; }
+.main-section .watermark-appt-advise {
+  opacity: 0.5;
+  font-size: 12px;
+  margin: 5px;
+  margin-left: 31%; }
+.main-section .watermark-appt-advise h3:first-child {
+  font-weight: bold; }
 
 /* Set height of the grid so .sidenav can be 100% (adjust if needed) */
 .row.content {

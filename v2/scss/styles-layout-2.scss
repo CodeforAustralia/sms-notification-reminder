@@ -88,6 +88,16 @@ header {
     text-align: center;
     margin-top: 20%;
   }
+  
+  .watermark-appt-advise{
+    opacity: 0.5;
+    font-size: 12px;
+    margin: 5px;
+    margin-left: 31%;
+  }
+  .watermark-appt-advise h3:first-child{
+    font-weight: bold;
+  }
 
 }
 
