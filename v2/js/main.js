@@ -75,6 +75,9 @@ function render_cards(cards) {
 	
 	if (Object.keys(cards).length < 1){
 		html = "<h2 class='watermark-appt'>No appointments on this day</h2>";
+		html += "<h3 class='watermark-appt-advise'>Something wrong? Check if you are:</h3>";
+		html += "<h3 class='watermark-appt-advise'>- using the correct acronym in your Outlook calendar - i.e. (CAR) or (RAR)</h3>";
+		html += "<h3 class='watermark-appt-advise'>- looking at the right Calendar and Date</h3>";
 	}
 
 	$(targetContainer).html(html);
