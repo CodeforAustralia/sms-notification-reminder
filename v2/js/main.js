@@ -55,17 +55,26 @@ function get_events(){
   	var data_url = "/services/get_events.php";
   	$.post( data_url, { date: selected_date, email: selected_menu })
 	  .done(function( data ) {
-	    var cards = JSON.parse(data);
-	    if (cards.error === undefined ) {
-	    	render_cards(cards);
-	    	events = cards;
-	    	set_events();
-			hide_loader();
-	    } else {
-	    	window.location = "/logout.php";
-	    }
+	    var cards = JSON.parse(data);			
+	    //console.log(cards);
+		if(cards.hasOwnProperty('errorNumber')) {
+			switch(cards.errorNumber) {
+			case 401: //unauthorized
+					window.location = "/logout.php";
+				break;
+				case 500: //error accesing calendar
+					cards = [];
+				break;
+			}
+		}
+		render_cards(cards);
+    	events = cards;
+    	set_events();		
+		hide_loader();
+	    
 	  });
 }
+
 
 function render_cards(cards) {
 	var targetContainer = $(".events-container"),
@@ -82,6 +91,7 @@ function render_cards(cards) {
 
 	$(targetContainer).html(html);
 }
+
 
 function get_menu(){
   	var data_url = "/include_files/emails_menu.txt";
@@ -164,4 +174,3 @@ function selected_messages() {
   	});
   	return messages_pos;
 }
-
