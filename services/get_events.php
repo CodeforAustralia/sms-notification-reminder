@@ -2,6 +2,7 @@
   session_start();
   require('../core/outlook2.php');
   require('../core/functions.php');
+  
   if(isset($_SESSION['access_token']) && $_SESSION['user_email'] && $_POST['email'] && $_POST['date']) {
       $events = OutlookService::getEventsByEmailAndDate($_SESSION['access_token'], $_SESSION['user_email'], $_POST['email'], $_POST['date']);
       
@@ -18,12 +19,16 @@
                             $event_template = $pased_subject['event_template'];
                             $phone          = trim($pased_subject['phone']);
                             $name           = trim($pased_subject['client_name']);
+                            $sent           = trim($pased_subject['sent']);
+                            $id             = $event['Id'];
                             if ($event_type != '' && $event_template != '' && $phone != '') {
                                 $events_output['cards'][] = array(
-                                        'name' => $name,
-                                        'mobile' => $phone,
-                                        'message' => $event_template,
-                                        'type' => $event_type,
+                                        'id'        => $id,
+                                        'sent'      => $sent,
+                                        'name'      => $name,
+                                        'mobile'    => $phone,
+                                        'message'   => $event_template,
+                                        'type'      => $event_type,
                                         'appt_date' => $pased_subject['appt_date']
                                     );   
                             }
@@ -31,8 +36,9 @@
                     }
                 }
             }
+            $events_output['self_calendar'] = array('email' => $_SESSION['user_email'] , 'name' => 'Your Calendar');
             echo json_encode($events_output);
       }
   } else {
-      echo json_encode(array("session_error" => true));
+      echo json_encode(array("errorNumber" => 401));
   }

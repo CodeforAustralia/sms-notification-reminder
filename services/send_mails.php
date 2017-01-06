@@ -26,15 +26,24 @@ if (isset($_POST['reminders'])) {
     
     echo "Thanks";
 } elseif (isset($_POST['messages'])) {
+    $update_event = array();
     foreach($_POST['messages'] as $message){
         $data[] = OutlookService::sendEmail($_SESSION['access_token'], $_SESSION['user_email'], $message['message'], '', $message['mobile'] . $pcsms);
         $rows[] = array($message['name'], $message['mobile'], $message['type'], $message['appt_date']);
+        $update_event[] = array(
+                                'id'=> $message['id'],
+                                'email'=> $_POST['email'],
+                                'user_email'=> $_SESSION['user_email'],
+                                'access_token'=> $_SESSION['access_token'],
+                            );
     }
     $email_data = array('subject' => $subject, 'rows' => $rows);
     $email_obj = new Email();
     
     //error_log(preg_replace('/\t+/', '',$email_obj->mergeTemplateData($email_data)));
     OutlookService::sendEmail($_SESSION['access_token'], $_SESSION['user_email'], $subject, $email_obj->mergeTemplateData($email_data), $_SESSION['user_email']);
+    
+    OutlookService::updateEventBody($update_event);
     
     echo "Thanks";
 } else {
