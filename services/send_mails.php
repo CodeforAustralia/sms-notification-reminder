@@ -43,7 +43,7 @@ if (isset($_POST['reminders'])) {
     //error_log(preg_replace('/\t+/', '',$email_obj->mergeTemplateData($email_data)));
     OutlookService::sendEmail($_SESSION['access_token'], $_SESSION['user_email'], $subject, $email_obj->mergeTemplateData($email_data), $_SESSION['user_email']);
     
-    OutlookService::updateEventBody($update_event);
+    OutlookService::updateEventSubject($update_event);
     
     echo "Thanks";
 } else {

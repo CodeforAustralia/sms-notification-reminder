@@ -269,7 +269,8 @@
       return $result;
     }
     
-    public static function updateEventBody($events){
+    public static function updateEventSubject($events){
+      date_default_timezone_set('Australia/Melbourne');
       foreach($events as $event_args) {
         $id     = $event_args['id'];
         $email  = $event_args['email'];
