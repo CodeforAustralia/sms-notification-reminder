@@ -284,7 +284,7 @@
         if(!empty($sent_dates)) {
           $event['Subject'] = str_replace($sent_dates[0],"Sent:" . $sent_dates[1] . date(", Y-m-d") . ".", $event['Subject']);
         } else {
-          $event['Subject'] .= " - Sent:" . date(" Y-m-d") . ".";
+          $event['Subject'] .= " # Sent:" . date(" Y-m-d") . ".";
         }
         $payload = '{
                       "Subject": "' . $event['Subject'] . '"
