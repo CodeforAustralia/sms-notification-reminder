@@ -11,6 +11,7 @@ function parse_subject($event_in_calendar) {
     $location   = $event_in_calendar['Location']['DisplayName'];
     $date_time  = pase_outlook_date($event_in_calendar['Start']['DateTime']);
     $output     = array();
+    $output['sent'] = get_sent_information($event_in_calendar['Subject']);
     if (isset($event[0])) {
         $event_info = explode(",", $event[0]);
         $phone      = end($event_info);
@@ -73,6 +74,12 @@ function find_matter_type_in_body($body ,$event_info, $location, $date_time) {
             $output['phone']          = sanitize_phone($event_info[1]);
 	    $output['event_type']     = "Dandenong Appointment Reminder";
             $output['event_template'] = dandenong_appointment_reminder_template($event_info, $location, $date_time);
+            break;
+        case stristr($body,'(SHP)'):
+            $output['client_name']    = (sizeof($event_info) > 1 ? $event_info[0]: "-");
+            $output['phone']          = sanitize_phone($event_info[1]);
+	        $output['event_type']     = "Shepparton Appointment Reminder";
+            $output['event_template'] = shepparton_appointment_reminder_template($event_info, $location, $date_time);
             break;
         default:
             # code...
@@ -222,7 +229,7 @@ function criminal_law_appointment_reminder_template($event_info, $location, $dat
 function sunshine_appointment_reminder_template($event_info, $location, $date_time) {
     $date   = $date_time['date'];
     $time   = $date_time['time'];
-    return "You have an appointment on " . $date . " at " . $time . " with Victoria Legal Aid. Location of appointment is at " . $location . ". To change call us on 9300 5333."; 
+    return "You have an appointment on " . $date . " at " . $time . " with Victoria Legal Aid. Location of appointment is at " . $location . ". To change call us on 9300 53334."; 
 }
 
 /**
@@ -238,10 +245,37 @@ function dandenong_appointment_reminder_template($event_info, $location, $date_t
 }
 
 /**
+ * Shepparton appointment reminders template
+ * @param  Array $event_info  
+ * @param  String $date_time  Date and time of the event
+ * @return String             Shepparton appointment reminder message template with all the information provided
+ */
+function shepparton_appointment_reminder_template($event_info, $location, $date_time) {
+    $date   = $date_time['date'];
+    $time   = $date_time['time'];
+    return "You have an appointment on " . $date . " at " . $time . " with Victoria Legal Aid. Location of appointment is at " . $location . ". To change call us on 5823 6200."; 
+}
+
+/**
  * Sanitize phone numbers   
  * @param  String $phone    [String with phone number]
  * @return String           [String without special characters or white spaces]
  */
 function sanitize_phone($phone){
     return preg_replace('/[^0-9.]+/', '', $phone);
+}
+
+/**
+ * Get Sent information   
+ * @param  String $subject  [String with subject of an event]
+ * @return String           [String with html of sent or not sent text and color]
+ */
+function get_sent_information($subject) {
+    $regex = '#Sent:(.*?)\.#';
+    preg_match($regex, $subject, $sent_dates);
+    if(!empty($sent_dates)) {
+        return "<span style='color:green'>Status: sent" . $sent_dates[1] . "</span>";
+    } else {
+        return "<span style='color:red'>Status: Not sent</span>";
+    }
 }

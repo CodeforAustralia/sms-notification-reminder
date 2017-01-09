@@ -69,7 +69,10 @@ function get_events(){
 		}
 		render_cards(cards);
     	events = cards;
-    	set_events();		
+    	set_events();
+		if(cards.hasOwnProperty('self_calendar')) {
+			set_self_calendar(cards.self_calendar);
+		}		
 		hide_loader();
 	    
 	  });
@@ -81,8 +84,8 @@ function render_cards(cards) {
     template = $("#messages-template").html();
 
 	var html = Mustache.to_html(template, cards);
-	
-	if (Object.keys(cards).length < 1){
+
+	if (Object.keys(cards).length <= 1){ // cards and self calendar
 		html = "<h2 class='watermark-appt'>No appointments on this day</h2>";
 		html += "<h3 class='watermark-appt-advise'>Something wrong? Check if you are:</h3>";
 		html += "<h3 class='watermark-appt-advise'>- using the correct acronym in your Outlook calendar - i.e. (CAR) or (RAR)</h3>";
@@ -133,10 +136,12 @@ function send_messages() {
 		show_loader();
 		$.post("/services/send_mails.php",
 	    {
-	        messages : choose_messages()
+	        messages : choose_messages(),
+	        email:	   selected_menu
 	    },
 	    function(data, status){
 	        console.log("Data: " + data + "\nStatus: " + status);
+	        get_events();
 	        hide_loader();
 	        alert("The reminders were sent");
 	    });
@@ -173,4 +178,12 @@ function selected_messages() {
        messages_pos.push($('.message-check').index( $(this) ));
   	});
   	return messages_pos;
+}
+
+function set_self_calendar(self_calendar){
+	if(document.getElementById(self_calendar.email)){
+	  // Calendar already exist
+	} else {
+	  $("#calendar_list").append("<li id='"+ self_calendar.email + "'><a href='#'>"+ self_calendar.name +"</a></li>");
+	}
 }

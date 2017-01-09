@@ -268,5 +268,28 @@
       }
       return $result;
     }
+    
+    public static function updateEventBody($events){
+      foreach($events as $event_args) {
+        $id     = $event_args['id'];
+        $email  = $event_args['email'];
+        $user_email  = $event_args['user_email'];
+        $access_token  = $event_args['access_token'];
+        
+        $getEventsUrl = self::$outlookApiUrl."/Users/" . $email . "/events/" . $id;      // {{API_URL}}/Users/{{email}}/events/{{event_id}}
+        $event = self::makeApiCall($access_token, $user_email, "GET", $getEventsUrl);
+        $regex = '#Sent:(.*?)\.#';
+        preg_match($regex, $event['Subject'], $sent_dates);
+        if(!empty($sent_dates)) {
+          $event['Subject'] = str_replace($sent_dates[0],"Sent:" . $sent_dates[1] . date(", Y-m-d") . ".", $event['Subject']);
+        } else {
+          $event['Subject'] .= " - Sent:" . date(" Y-m-d") . ".";
+        }
+        $payload = '{
+                      "Subject": "' . $event['Subject'] . '"
+                    }';
+       self::makeApiCall($access_token, $user_email, "PATCH", $getEventsUrl, $payload);
+      }
+    }
   }
 ?>

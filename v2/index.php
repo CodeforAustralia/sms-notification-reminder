@@ -36,10 +36,11 @@
 						</div>	
 						<div class="col-xs-7 card-message">
 						  	<span><b>{{type}}</b></span><br>
-						  	<span>{{message}}</span>
+						  	<span>{{message}}</span><br>
+						  	<span>{{{sent}}}</span>
 						</div>
 						<div class="col-xs-1 checkbox-container">
-							<input type="checkbox" name="message-check" class="message-check">
+							<input type="checkbox" name="message-check" id="{{id}}" class="message-check">
 						</div>	
 					</div>	
 				</div>	
