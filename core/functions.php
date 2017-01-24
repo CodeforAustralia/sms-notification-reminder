@@ -6,11 +6,12 @@
  * @return Array                     Event type, template and client number 
  */
 function parse_subject($event_in_calendar) {
-    $event      = explode("#", $event_in_calendar['Subject']);
-    $body       = $event_in_calendar['Body']['Content'];
-    $location   = $event_in_calendar['Location']['DisplayName'];
-    $date_time  = pase_outlook_date($event_in_calendar['Start']['DateTime']);
-    $output     = array();
+    $event          = explode("#", $event_in_calendar['Subject']);
+    $body           = $event_in_calendar['Body']['Content'];
+    $body_preview   = $event_in_calendar['BodyPreview'];
+    $location       = $event_in_calendar['Location']['DisplayName'];
+    $date_time      = pase_outlook_date($event_in_calendar['Start']['DateTime']);
+    $output         = array();
     $output['sent'] = get_sent_information($event_in_calendar['Subject']);
     if (isset($event[0])) {
         $event_info = explode(",", $event[0]);
@@ -19,12 +20,16 @@ function parse_subject($event_in_calendar) {
         $output['client_name']  = (isset($event[1]) && isset($event[2]) ? $event[1]: "-" );
         $output['phone']        = sanitize_phone($phone);
         $output['appt_date']    = $date_time['date'] . " " . $date_time['time'];
-        $output = find_matter_type_in_body($body ,$event_info, $location, $date_time) + $output;
+        $event_obj = find_matter_type_in_body($body, $event_info, $location, $date_time); 
+        if($event_obj ['event_type'] == "") {
+            $event_obj = find_matter_type_in_body($body_preview, $event_info, $location, $date_time); 
+        }
+        $output =  $event_obj + $output;
     }
     return $output;
 }
 
-function find_matter_type_in_body($body ,$event_info, $location, $date_time) {
+function find_matter_type_in_body($body, $event_info, $location, $date_time) {
     $output = array();
     switch(true){
         case stristr($body,'(CR)'):
@@ -60,19 +65,19 @@ function find_matter_type_in_body($body ,$event_info, $location, $date_time) {
         case stristr($body,'(CAR)'):
             $output['client_name']    = (sizeof($event_info) > 1 ? $event_info[0]: "-");
             $output['phone']          = sanitize_phone($event_info[1]);
-	    $output['event_type']     = "Criminal Law Appointment Reminder";
+	        $output['event_type']     = "Criminal Law Appointment Reminder";
             $output['event_template'] = criminal_law_appointment_reminder_template($event_info, $location, $date_time);
             break;
-	case stristr($body,'(SAR)'):
+        case stristr($body,'(SAR)'):
             $output['client_name']    = (sizeof($event_info) > 1 ? $event_info[0]: "-");
             $output['phone']          = sanitize_phone($event_info[1]);
-	    $output['event_type']     = "Sunshine Appointment Reminder";
+	        $output['event_type']     = "Sunshine Appointment Reminder";
             $output['event_template'] = sunshine_appointment_reminder_template($event_info, $location, $date_time);
             break;
-	case stristr($body,'(DAR)'):
+	    case stristr($body,'(DAR)'):
             $output['client_name']    = (sizeof($event_info) > 1 ? $event_info[0]: "-");
             $output['phone']          = sanitize_phone($event_info[1]);
-	    $output['event_type']     = "Dandenong Appointment Reminder";
+	        $output['event_type']     = "Dandenong Appointment Reminder";
             $output['event_template'] = dandenong_appointment_reminder_template($event_info, $location, $date_time);
             break;
         case stristr($body,'(SHP)'):

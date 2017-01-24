@@ -40,6 +40,28 @@
 .text-center>:first-child:before {bottom:0;right:0;border-width: 0 3px 3px 0}
 .text-center>:first-child:after {bottom:0;left:0;border-width: 0 0 3px 3px}
 
+.login-box{
+    color: #333;
+}
+
+.login-box:hover{
+    color: #333;
+}
+
+.login-box:hover span{
+    color: #337ab7;
+    text-decoration: underline;
+}
+
+.login-box p{
+    font-size: 16px;
+}
+
+.login-box p span{
+    font-weight: bold;
+    color: #337ab7;
+}
+
 .refresh_page {
     margin-right: 15px;
 }

@@ -29,10 +29,12 @@
       <!-- User not logged in, prompt for login -->
       <div class="container container-table">
         <div class="row vertical-center-row">
-          <div class="text-center col-md-4 col-md-offset-4">
-            <h2>SMS Notification Service</h2>
-            <p>Please <a href="<?php echo oAuthService::getLoginUrl($redirectUri)?>">sign in</a> with your VLA account.</p>
-          </div>
+          <a class="login-box" href="<?php echo oAuthService::getLoginUrl($redirectUri)?>">
+            <div class="text-center col-md-4 col-md-offset-4">
+              <h2>SMS Notification Service</h2>
+              <p>Please <span class="fake-link">sign in</span> with your VLA account.</p>
+            </div>
+          </a>
         </div>
       </div>
     <?php

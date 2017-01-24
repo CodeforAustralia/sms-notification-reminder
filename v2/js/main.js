@@ -90,6 +90,7 @@ function render_cards(cards) {
 		html += "<h3 class='watermark-appt-advise'>Something wrong? Check if you are:</h3>";
 		html += "<h3 class='watermark-appt-advise'>- using the correct acronym in your Outlook calendar - i.e. (CAR) or (RAR)</h3>";
 		html += "<h3 class='watermark-appt-advise'>- looking at the right Calendar and Date</h3>";
+		html += "<h3 class='watermark-appt-advise'>Still not sure what to do? see the <a href='https://drive.google.com/open?id=0B2r-YUcKdm80MktwSGc2Y2hCQTg' target='_blank'>manual</a> or <a href='mailto:vla_fellows@codeforaustralia.org'>email</a> for support</h3>";
 	}
 
 	$(targetContainer).html(html);
