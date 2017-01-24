@@ -219,10 +219,9 @@ function ringwood_appointment_reminder_template($event_info, $location, $date_ti
  * @return String             Ringwood appointment reminder message template with all the information provided
  */
 function criminal_law_appointment_reminder_template($event_info, $location, $date_time) {
-    $phone  = ((sizeof($event_info) > 2 ) ? sanitize_phone(end($event_info)) : '********' );
     $date   = $date_time['date'];
     $time   = $date_time['time'];
-    return "You have an appointment on " . $date . " at " . $time . " with Victoria Legal Aid. Location of appointment is at " . $location . ". To change call us on " . $phone . ".";  
+    return "You have an appointment on " . $date . " at " . $time . " with Victoria Legal Aid. Location of appointment is at " . $location . ". To change call us on 92690133.";  
 }
 
 /**
