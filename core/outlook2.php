@@ -278,19 +278,55 @@
         $access_token  = $event_args['access_token'];
         
         $getEventsUrl = self::$outlookApiUrl."/Users/" . $email . "/events/" . $id;      // {{API_URL}}/Users/{{email}}/events/{{event_id}}
-        $event = self::makeApiCall($access_token, $user_email, "GET", $getEventsUrl);
+        //$event = self::makeApiCall($access_token, $user_email, "GET", $getEventsUrl);
+        $event_subject = $_SESSION['events'][$id];
         $regex = '#Sent:(.*?)\.#';
-        preg_match($regex, $event['Subject'], $sent_dates);
+        preg_match($regex, $event_subject, $sent_dates);
         if(!empty($sent_dates)) {
-          $event['Subject'] = str_replace($sent_dates[0],"Sent:" . $sent_dates[1] . date(", Y-m-d") . ".", $event['Subject']);
+          $event_subject = str_replace($sent_dates[0],"Sent:" . $sent_dates[1] . date(", Y-m-d") . ".", $event_subject);
         } else {
-          $event['Subject'] .= " # Sent:" . date(" Y-m-d") . ".";
+          $event_subject .= " # Sent:" . date(" Y-m-d") . ".";
         }
         $payload = '{
-                      "Subject": "' . $event['Subject'] . '"
+                      "Subject": "' . $event_subject . '"
                     }';
        self::makeApiCall($access_token, $user_email, "PATCH", $getEventsUrl, $payload);
       }
+    }
+    
+    public static function getEventById($event){
+        $id     = $event_args['id'];
+        $email  = $event_args['email'];
+        $user_email  = $event_args['user_email'];
+        $access_token  = $event_args['access_token'];
+        
+        $getEventsUrl = self::$outlookApiUrl."/Users/" . $email . "/events/" . $id;      // {{API_URL}}/Users/{{email}}/events/{{event_id}}
+        $event = self::makeApiCall($access_token, $user_email, "GET", $getEventsUrl);
+        return $event;
+    }
+    
+    public static function validateEmailAccess($access_token, $user_email, $emails){
+      date_default_timezone_set('Australia/Melbourne');
+      
+      $today = date('Y-m-d');
+      $getEventsParameters = array (
+        "\$select" => "Subject",
+        // Only return Subject, Start, and End fields
+        "startdatetime" => $today . "T00:00:00Z",
+        // Sort by Start, oldest first
+        "enddatetime" => $today . "T23:59:00Z"
+      );
+      
+      $emails_access = array();
+      
+      foreach($emails as $email){
+        $getEventsUrl = self::$outlookApiUrl."/Users/" .$email->email . "/calendarview?".http_build_query($getEventsParameters); 
+        $api_call = self::makeApiCall($access_token, $user_email, "GET", $getEventsUrl);
+        if(!isset($api_call["errorNumber"])) {
+          $emails_access[] = $email;
+        }
+      }
+      return $emails_access;
     }
   }
 ?>

@@ -10,7 +10,7 @@
           echo json_encode($events);
       } else {
             $events_output = array();
-            foreach ($events as $calendar_key => $calendar_events) { 
+            foreach ($events as $calendar_key => $calendar_events) {
                 if (is_array($calendar_events)) {
                     foreach($calendar_events as $event) {
                         if (!stristr($event['Subject'],'cancel') && !stristr($event['Subject'],'reschedule')) {
@@ -32,6 +32,7 @@
                                         'appt_date' => $pased_subject['appt_date']
                                     );   
                             }
+                            $_SESSION['events'][$id] = $event['Subject'];
                         }
                     }
                 }

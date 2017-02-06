@@ -98,7 +98,7 @@ function render_cards(cards) {
 
 
 function get_menu(){
-  	var data_url = "/include_files/emails_menu.txt";
+  	var data_url = "/services/email_access.php";
   	$.post( data_url, {})
 	  .done(function( data ) {
 	    var items = JSON.parse(data);	    
