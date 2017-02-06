@@ -101,12 +101,16 @@ function get_menu(){
   	var data_url = "/services/email_access.php";
   	$.post( data_url, {})
 	  .done(function( data ) {
-	    var items = JSON.parse(data);	    
-    	render_menu(items);
-		selected_menu = $("#calendar_list li")[0].id;
-		$("#current-calendar").text($("#calendar_list li a")[0].text);
-		$("#calendar_list li").first().addClass("active");
-		get_events();
+	  	if(data.length > 0) {
+		    var items = JSON.parse(data);	    
+	    	render_menu(items);
+			selected_menu = $("#calendar_list li")[0].id;
+			$("#current-calendar").text($("#calendar_list li a")[0].text);
+			$("#calendar_list li").first().addClass("active");
+			get_events();
+	  	} else {
+	  		window.location = "/logout.php"; //Not logged in user
+	  	}
 	  });
 }
 
