@@ -86,6 +86,12 @@ function find_matter_type_in_body($body, $event_info, $location, $date_time) {
 	        $output['event_type']     = "Shepparton Appointment Reminder";
             $output['event_template'] = shepparton_appointment_reminder_template($event_info, $location, $date_time);
             break;
+        case stristr($body,'(CSAR)'):
+            $output['client_name']    = (sizeof($event_info) > 1 ? $event_info[0]: "-");
+            $output['phone']          = sanitize_phone($event_info[1]);
+	        $output['event_type']     = "Child Support Appointment Reminder";
+            $output['event_template'] = child_support_appointment_reminder_template($event_info, $location, $date_time);
+            break;
         default:
             # code...
             $output['event_type'] = "";
@@ -258,6 +264,18 @@ function shepparton_appointment_reminder_template($event_info, $location, $date_
     $date   = $date_time['date'];
     $time   = $date_time['time'];
     return "You have an appointment on " . $date . " at " . $time . " with Victoria Legal Aid. Location of appointment is at " . $location . ". To change call us on 5823 6200."; 
+}
+
+/**
+ * Child Support appointment reminders template
+ * @param  Array $event_info  
+ * @param  String $date_time  Date and time of the event
+ * @return String             Child support appointment reminder message template with all the information provided
+ */
+function child_support_appointment_reminder_template($event_info, $location, $date_time) {
+    $date   = $date_time['date'];
+    $time   = $date_time['time'];
+    return "You have an appointment on " . $date . " at " . $time . " with Victoria Legal Aid. Location of appointment is at " . $location . ". To change call us on 9269 0408."; 
 }
 
 /**
