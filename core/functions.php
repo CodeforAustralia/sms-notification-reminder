@@ -275,7 +275,7 @@ function shepparton_appointment_reminder_template($event_info, $location, $date_
 function child_support_appointment_reminder_template($event_info, $location, $date_time) {
     $date   = $date_time['date'];
     $time   = $date_time['time'];
-    return "You have an appointment on " . $date . " at " . $time . " with Victoria Legal Aid. Location of appointment is at " . $location . ". To change call us on 9269 0408."; 
+    return "You have a Child Support appointment on " . $date . " at " . $time . " with Victoria Legal Aid. Location of appointment is at " . $location . ". To change call us on 9269 0408."; 
 }
 
 /**
