@@ -102,7 +102,7 @@ header {
 }
 
 /* Set height of the grid so .sidenav can be 100% (adjust if needed) */
-.row.content {height: 780px}
+/*.row.content {height: 780px}*/
 
 /* Set gray background color and 100% height */
 .sidenav {
@@ -118,6 +118,10 @@ header {
     .datepicker {
       display: inline-block;
     }
+  }
+  #calendar_list{
+    overflow-y: scroll;
+    height: 210px;
   }
 }
 
