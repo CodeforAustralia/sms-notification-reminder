@@ -21,7 +21,6 @@ if (isset($_POST['reminders'])) {
     $email_data = array('subject' => $subject, 'rows' => $rows);
     $email_obj = new Email();
     
-    //error_log(preg_replace('/\t+/', '',$email_obj->mergeTemplateData($email_data)));
     OutlookService::sendEmail($_SESSION['access_token'], $_SESSION['user_email'], $subject, $email_obj->mergeTemplateData($email_data), $_SESSION['user_email']);
     
     echo "Thanks";
@@ -40,7 +39,6 @@ if (isset($_POST['reminders'])) {
     $email_data = array('subject' => $subject, 'rows' => $rows);
     $email_obj = new Email();
     
-    //error_log(preg_replace('/\t+/', '',$email_obj->mergeTemplateData($email_data)));
     OutlookService::sendEmail($_SESSION['access_token'], $_SESSION['user_email'], $subject, $email_obj->mergeTemplateData($email_data), $_SESSION['user_email']);
     
     OutlookService::updateEventSubject($update_event);
