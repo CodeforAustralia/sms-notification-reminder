@@ -248,11 +248,11 @@ function update_template(template){
 			if(__current_template[0].abbreviation != template.abbreviation && search_previous.length < 1) {//if modifying abbreviation ensure that doesnt exist
 			  	__templates[pos].abbreviation = template.abbreviation;
 				__templates[pos].name		= template.name;
-				__templates[pos].phone		= template.phone;
+				__templates[pos].office_number		= template.office_number;
 				__templates[pos].content	= template.content;
 			} else if(__current_template[0].abbreviation == template.abbreviation) {
 				__templates[pos].name		= template.name;
-				__templates[pos].phone		= template.phone;
+				__templates[pos].office_number		= template.office_number;
 				__templates[pos].content	= template.content;
 			}
 			template_found = true;
