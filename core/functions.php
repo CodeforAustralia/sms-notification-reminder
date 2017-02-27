@@ -98,14 +98,20 @@ function set_template($args) {
     $date      = $args['date'];
     $time      = $args['time'];
     $location  = $args['location'];
+    $output    = new stdClass();
     if(!empty($template)) {
-        $template->content = str_replace("(phone)", $template->office_number, $template->content);
-        $template->content = str_replace("(date)", $date, $template->content);
-        $template->content = str_replace("(time)", $time, $template->content);
-        $template->content = str_replace("(location)", $location, $template->content);
+        $output->content   = $template->content;
+        $output->office_number   = $template->office_number;
+        
+        $output->content = str_replace("(phone)", $output->office_number, $output->content);
+        $output->content = str_replace("(date)", $date, $output->content);
+        $output->content = str_replace("(time)", $time, $output->content);
+        $output->content = str_replace("(location)", $location, $output->content);
+        
+        $output->name = $template->name;
     }
 
-    return $template;
+    return $output;
 }
 
 /**
