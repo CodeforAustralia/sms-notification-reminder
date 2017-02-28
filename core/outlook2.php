@@ -216,6 +216,10 @@
     public static function sendEmail($access_token, $user_email, $subject, $content, $recipient = '') {
       
       if ($recipient != '') {
+        if($content == '') { //if empty content then get subject and put it into the body to avoid limitation of chars
+          $content = $subject;
+          $subject = '';
+        }
         $getEventsUrl = self::$outlookApiUrl."/Me/sendmail/";      //https://outlook.office.com/api/v2.0/me/sendmail
         $payload = '{
                       "Message": {
