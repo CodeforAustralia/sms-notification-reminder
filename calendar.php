@@ -41,23 +41,11 @@
         if(isset($_SESSION['redirect']) && $_SESSION['redirect'] == 'admin') {
           $_SESSION['redirect'] = '';
           header("Location: /admin/validate.php");
+          die();
         } else {
           header("Location: /v2");
           die();
         }
-        $calendars = OutlookService::getCalendars($_SESSION['access_token'], $_SESSION['user_email']);
-        if (isset($calendars['errorNumber']) && $calendars['errorNumber'] > 400) {
-          header("Location: logout.php");
-          die();
-        }
-	
-      	if($ownCalendars) {
-      		/** Own calendars **/
-      		$events = OutlookService::getEventsByCalendars($_SESSION['access_token'], $_SESSION['user_email'], $calendars['value']);
-      	} else {	
-      		/** Calendars by emails in source[file] **/
-      		$events = OutlookService::getEventsByEmails();
-      	}
       }
     ?>
   </body>

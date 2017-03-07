@@ -189,7 +189,7 @@
 									    <button type="button" class="btn btn-primary btn-xs shortcut-tag">(time)</button>
 									    <button type="button" class="btn btn-primary btn-xs shortcut-tag">(location)</button>
 									    <button type="button" class="btn btn-primary btn-xs shortcut-tag">(phone)</button>
-									    
+									    <button type="button" class="btn btn-primary btn-xs shortcut-tag">(name)</button>
 									  </div>
 									</div>
 									

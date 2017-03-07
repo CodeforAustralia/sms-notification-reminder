@@ -109,7 +109,7 @@
     public static function getMessages($access_token, $user_email) {
       $getMessagesParameters = array (
         // Only return Subject, ReceivedDateTime, and From fields
-        "\$select" => "Subject,ReceivedDateTime,From",
+        "\$select" => "Subject,ReceivedDateTime,From,Organizer",
         // Sort by ReceivedDateTime, newest first
         "\$orderby" => "ReceivedDateTime DESC",
         // Return at most 20 results
@@ -124,7 +124,7 @@
     public static function getEvents($access_token, $user_email) {
       $getEventsParameters = array (
         // Only return Subject, Start, and End fields
-        "\$select" => "Subject,Start,End, BodyPreview",
+        "\$select" => "Subject,Start,End, BodyPreview,Organizer",
         // Sort by Start, oldest first
         "\$orderby" => "Start/DateTime",
         // Return at most 20 results
@@ -156,7 +156,7 @@
       }
       
       $getEventsParameters = array (
-        "\$select" => "Subject,Start,Location, BodyPreview",
+        "\$select" => "Subject,Start,Location, BodyPreview,Organizer",
         // Only return Subject, Start, and End fields
         "startdatetime" => $today . "T13:00:00Z",
         // Sort by Start, oldest first
@@ -181,7 +181,7 @@
       }
       
       $getEventsParameters = array (
-        "\$select" => "Subject,Start,Location, BodyPreview, Body",
+        "\$select" => "Subject,Start,Location, BodyPreview, Body,Organizer",
         // Only return Subject, Start, and End fields
         "startdatetime" => $today . "T13:00:00Z",
         // Sort by Start, oldest first
@@ -200,7 +200,7 @@
       $day_before = date('Y-m-d',strtotime($date . ' -1 day'));
       
       $getEventsParameters = array (
-        "\$select" => "Subject,Start,Location, BodyPreview, Body",
+        "\$select" => "Subject,Start,Location, BodyPreview, Body,Organizer",
         // Only return Subject, Start, and End fields
         "startdatetime" => $day_before . "T13:00:00Z",
         // Sort by Start, oldest first

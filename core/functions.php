@@ -23,7 +23,8 @@ function parse_subject($event_in_calendar, $templates) {
                         'body'      => $body,
                         'date'      => $date_time['date'],
                         'time'      => $date_time['time'],
-                        'location'  => $location
+                        'location'  => $location,
+                        'organizer' => $event_in_calendar['Organizer']['EmailAddress']['Name']
                     ); 
         $event_obj = set_template($args);
         if($event_obj->name == "") {
@@ -98,6 +99,7 @@ function set_template($args) {
     $date      = $args['date'];
     $time      = $args['time'];
     $location  = $args['location'];
+    $organizer = $args['organizer'];
     $output    = new stdClass();
     if(!empty($template)) {
         $output->content   = $template->content;
@@ -107,6 +109,7 @@ function set_template($args) {
         $output->content = str_replace("(date)", $date, $output->content);
         $output->content = str_replace("(time)", $time, $output->content);
         $output->content = str_replace("(location)", $location, $output->content);
+        $output->content = str_replace("(name)", $organizer, $output->content);
         
         $output->name = $template->name;
     }
