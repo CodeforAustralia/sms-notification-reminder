@@ -19,18 +19,23 @@ $(function() {
     enable_tooltips();
     hide_loader();
     shortcut_button();
+    close_pop_up();
+    character_count();
 });
 
+//Display loader and fade background
 function show_loader() {
 	$("#fade").show();
 	$("#modal").show();
 }
 
+//Hide loader and fade background
 function hide_loader() {
 	$("#fade").hide();
 	$("#modal").hide();
 }
 
+//Display Add calendar form from template and add validation to form
 function add_calendar() {
 	$("#add-calendar").on("click", function(){
 		$("#fade").show();
@@ -40,6 +45,7 @@ function add_calendar() {
 	});
 }
 
+//Display edit calendar form from template, fill it and add validation to form
 function open_edit_calendar() {
 	$("body").on("click", ".edit-calendar", function(){
 		$("#fade").show();
@@ -51,8 +57,8 @@ function open_edit_calendar() {
 	});
 }
 
+//Save calendar and hide modal
 function save_edit_calendar() {
-	//$("body").on("click", ".save-calendar", function(){
 		$("#fade").hide();
 		$("#forms").hide();
 		var calendar = {};
@@ -62,18 +68,21 @@ function save_edit_calendar() {
 		$("#forms").html('');
 		__current_calendar = {};
 		store_data('calendar');
-	//});
 }
 
+//Display Add template form from and add validation to form
 function add_template() {
 	$("#add-template").on("click", function(){
 		$("#fade").show();
 		$("#forms").html($("#template-form-container").html());
 		$("#forms").show();
 		validate_template_form();
+		var content = $("#forms #template-content").val();
+		$("#forms #char-count").text(400 - content.length + substract_tags(content));
 	});
 }
 
+//Display edit template form from , fill it and add validation to form
 function open_edit_template() {
 	$("body").on("click", ".edit-template", function(){
 		$("#fade").show();
@@ -85,8 +94,8 @@ function open_edit_template() {
 	});
 }
 
+//Save template and hide modal
 function save_edit_template() {
-	//$("body").on("click", ".save-template", function(){
 		$("#fade").hide();
 		$("#forms").hide();
 		
@@ -100,13 +109,14 @@ function save_edit_template() {
 		$("#forms").html('');
 		__current_template = {};
 		store_data('template');
-	//});
 }
 
+//Enable bootstrap tooltips
 function enable_tooltips() {
 	$('[data-toggle="tooltip"]').tooltip(); 
 }
 
+//Get calendars from service or logout if lost session
 function get_calendars(){
 	show_loader();  	
   	var data_url = "/services/get_calendars.php";
@@ -115,7 +125,6 @@ function get_calendars(){
 	  	__calendars = JSON.parse(data);
 	    var calendars = {};	
 	    calendars.calendar = JSON.parse(data);
-	    console.log(calendars);
 	    
 		if(calendars.calendar.hasOwnProperty('errorNumber')) {
 			switch(calendars.calendar.errorNumber) {
@@ -130,6 +139,7 @@ function get_calendars(){
 	  });
 }
 
+//Set calendar information using MustacheJs template 
 function render_calendars(calendars) {
 	var targetContainer = $(".calendar-table tbody"),
     template = $("#calendar-template").html();
@@ -137,6 +147,7 @@ function render_calendars(calendars) {
 	$(targetContainer).html(html);
 }
 
+//Get templates from service or logout if lost session
 function get_templates(){
 	show_loader();  	
   	var data_url = "/services/get_templates.php";
@@ -145,7 +156,6 @@ function get_templates(){
 	  	__templates = JSON.parse(data);
 	    var templates = {};	
 	    templates.templates = JSON.parse(data);
-	    console.log(templates);
 	    
 		if(templates.templates.hasOwnProperty('errorNumber')) {
 			switch(templates.templates.errorNumber) {
@@ -160,6 +170,7 @@ function get_templates(){
 	  });
 }
 
+//Set template information using MustacheJs template 
 function render_templates(templates) {
 	var targetContainer = $(".template-table tbody"),
     template = $("#template-template").html();
@@ -167,18 +178,21 @@ function render_templates(templates) {
 	$(targetContainer).html(html);
 }
 
+//Open calendar tab on left menu
 function open_calendars(){
 	$("#open-calendars").on("click", function() {
 	    get_calendars();
 	});
 }
 
+//Open template tab on left menu
 function open_templates(){
 	$("#open-templates").on("click", function() {
 	    get_templates();
 	});
 }
 
+//Get information from an specific email inside the calendars object
 function get_calendar_by_email(email) {
   return __calendars.filter(
     function(__calendars) {
@@ -187,6 +201,7 @@ function get_calendar_by_email(email) {
   );
 }
 
+//Get information from an specific abbreviation inside the templates object
 function get_template_by_abbr(abbr) {
   return __templates.filter(
     function(__templates) {
@@ -195,18 +210,22 @@ function get_template_by_abbr(abbr) {
   );
 }
 
+//Fill calendar information in pop-up window
 function fill_calendar_window(information) {
 	$("#forms #calendar-name").val(information[0].name);
 	$("#forms #calendar-email").val(information[0].email);
 }
 
+//Fill template information in pop-up window
 function fill_template_window(information) {
 	$("#forms #template-name").val(information[0].name);
 	$("#forms #template-abbreviation").val(information[0].abbreviation);
 	$("#forms #template-phone").val(information[0].office_number);
 	$("#forms #template-content").val(information[0].content);
+	$("#forms #char-count").text(400 - information[0].content.length + substract_tags(information[0].content));
 }
 
+//Put tag text inside template content after clicking tag button
 function shortcut_button(){
 	$("body").on("click", "#forms .shortcut-tag", function(){	
 	   var $txt = $("#forms #template-content");
@@ -217,6 +236,7 @@ function shortcut_button(){
 	});
 }
 
+//Update calendars object checking if its a delition, an edition or a creation
 function update_calendar(calendar){
 	var calendar_found = false;
 	var search_previous = get_calendar_by_email(calendar.email);
@@ -240,6 +260,7 @@ function update_calendar(calendar){
 	}
 }
 
+//Update templates object checking if its a delition, an edition or a creation
 function update_template(template){
 	var template_found = false;
 	var search_previous = get_template_by_abbr(template.abbreviation);
@@ -267,6 +288,7 @@ function update_template(template){
 	}
 }
 
+//On click button functionality for dynamic elements
 function delete_calendar(){
 	$("body").on("click", ".delete-calendar", function() {
 	    var email = $(this).attr("id");
@@ -275,27 +297,30 @@ function delete_calendar(){
 	})
 }
 
+//Delete calendar by email
 function remove_calendar(email){
 	return __calendars.filter(function(calendar) { 
 	   return calendar.email !== email;  
 	});
 }
 
+//On click button functionality for dynamic elements
 function delete_template(){
 	$("body").on("click", ".delete-template", function() {
 	    var abbreviation = $(this).attr("id");
-	    console.log(abbreviation);
 	    __templates = remove_template(abbreviation);
 	    store_data('template');
 	})
 }
 
+//Delete template by abbreviation
 function remove_template(abbreviation){
 	return __templates.filter(function(template) { 
 	   return template.abbreviation !== abbreviation;  
 	});
 }
 
+//Jquery validation for calendar form
 function validate_calendar_form(){
 	// validate signup form on keyup and submit
 	$("#forms #calendar-form").validate({
@@ -312,6 +337,7 @@ function validate_calendar_form(){
 	});
 }
 
+//Jquery validation for template form
 function validate_template_form(){
 	// validate signup form on keyup and submit
 	$("#forms #template-form").validate({
@@ -351,6 +377,7 @@ function validate_template_form(){
 	});
 }
 
+//Save calendars or templates object
 function store_data(save_type){
 	show_loader();
 	var data_url = "/services/set_information.php";
@@ -377,4 +404,40 @@ function store_data(save_type){
 		}
 		hide_loader();
 	  });
+}
+
+//Close when adding or editting calendars or templates
+function close_pop_up(){
+	$("body").on("click", ".close-icon, .cancel", function() {
+	    $("#fade").hide();
+		$("#forms").hide();
+		__current_calendar = {};
+		__current_template = {};
+	});
+}
+
+//Character counter text and event
+function character_count(){
+	var max_amount = 400;
+	$("body").on("keyup", "#template-content", function(){
+		limit_text(this , max_amount + substract_tags($(this).val()));
+		$("body #char-count").text((max_amount - $(this).val().length) + substract_tags($(this).val()));
+	});
+}
+
+//Regec function to avoid counting tags from character count function
+function substract_tags(text) {
+    var mts = text.match(/\(([^()]+)\)/g );
+    var total_char = 0;
+    mts.forEach(function(entry) {
+    	total_char += entry.length;
+	});
+	return total_char;
+}
+
+//Avoid more than the allowed text in the template content
+function limit_text(limitField, limitNum) {
+	if (limitField.value.length > limitNum) {
+		limitField.value = limitField.value.substring(0, limitNum);
+	} 
 }

@@ -10,7 +10,7 @@
 ?>
 <html>
   <head>
-    <title>PHP Calendar API Tutorial</title>
+    <title>SMS Reminders</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -32,7 +32,7 @@
         <div class="row vertical-center-row">
           <a class="login-box" href="<?php echo oAuthService::getLoginUrl($redirectUri)?>">
             <div class="text-center col-md-4 col-md-offset-4">
-              <h2>SMS Notification Service</h2>
+              <h2>SMS Reminders</h2>
               <p>Please <span class="fake-link">sign in</span> with your VLA account.</p>
             </div>
           </a>
@@ -41,21 +41,26 @@
     <?php
       }
       else {
-        header("Location: /v2");
-        die();
+        if(isset($_SESSION['redirect']) && $_SESSION['redirect'] == 'admin') {
+          $_SESSION['redirect'] = '';
+          header("Location: /admin/validate.php");
+        } else {
+          header("Location: /v2");
+          die();
+        }
         $calendars = OutlookService::getCalendars($_SESSION['access_token'], $_SESSION['user_email']);
         if (isset($calendars['errorNumber']) && $calendars['errorNumber'] > 400) {
           header("Location: logout.php");
           die();
         }
 	
-	if($ownCalendars) {
-		/** Own calendars **/
-		$events = OutlookService::getEventsByCalendars($_SESSION['access_token'], $_SESSION['user_email'], $calendars['value']);
-	} else {	
-		/** Calendars by emails in source[file] **/
-		$events = OutlookService::getEventsByEmails();
-	}
+      	if($ownCalendars) {
+      		/** Own calendars **/
+      		$events = OutlookService::getEventsByCalendars($_SESSION['access_token'], $_SESSION['user_email'], $calendars['value']);
+      	} else {	
+      		/** Calendars by emails in source[file] **/
+      		$events = OutlookService::getEventsByEmails();
+      	}
 
     ?>
       <!-- User is logged in, do something here -->

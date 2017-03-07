@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>SMS Reminder</title>
+		<title>SMS Reminders</title>
 		<meta charset="utf-8">
     		<meta http-equiv="X-UA-Compatible" content="IE=edge"> 
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -59,7 +59,7 @@
 		<header>
 
 			<ul>
-				<li><span><b>SMS</b> Reminder</span></li>
+				<li><span><b>SMS</b> Reminders</span></li>
 			    <li class="logout"><a class="active" href="/logout.php">Logout</a></li>
 			</ul>
 		</header>
@@ -94,7 +94,7 @@
 		
 		<footer class="footer">
 			<div class="container">
-				<p class="text-muted"><i class="fa fa-github" aria-hidden="true"></i> If you find an issue or just want to give us your feedback, please use this link. (<a href="https://github.com/CodeforAustralia/sms-notification-reminder/issues/" target="_blank">Link</a>)</p>
+				<p class="text-muted">Need help? Found an issue? <a href="mailto:christiana16@vla.vic.gov.au?subject=SMS Reminders Support"> Email the Helpdesk team for support.</a></p>
 			</div>
 		</footer>
 

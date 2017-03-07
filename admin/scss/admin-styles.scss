@@ -95,6 +95,21 @@ header {
   padding: 30px 15px 0px;
   z-index: 1002;
   background-color: white;
+  .close-icon{
+    position: absolute;
+    left: 95%;
+    top: 7px;
+      color: $bootstrap_grey;
+    &:hover{
+      color: black;
+    }
+  }
+  .char-box{
+    float: right;
+    padding-top: 10px;
+    font-size: 10px;
+    color: $bootstrap_grey;
+  }
 }
 
 /* Set height of the grid so .sidenav can be 100% (adjust if needed) */

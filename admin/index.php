@@ -1,7 +1,13 @@
+<?php
+  session_start();
+  if(!isset($_SESSION['admin']) || $_SESSION['admin'] != $_SESSION['access_token']){
+      header("Location: /admin/validate.php");
+  }
+?>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>SMS Reminder Admin</title>
+		<title>SMS Reminders Admin</title>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge"> 
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -49,7 +55,7 @@
 			<ul>
 				<li><span><b>SMS</b> Reminder Admin</span></li>
 			    <li class="logout"><a class="active" href="/logout.php">Logout</a></li>
-			    <li class="admin-menu"><a href="/admin">Admin</a></li>
+			    <li class="admin-menu"><a href="/">Dashboard</a></li>
 			</ul>
 		</header>
 		<div class="container-fluid">
@@ -89,8 +95,9 @@
 						    <form class="form-horizontal" id="calendar-form">
 								<fieldset>
 								
-								<!-- Form Name -->
-								<legend></legend>
+									<div class="pull-right close-icon"><i class="fa fa-times" aria-hidden="true"></i></div>
+									<!-- Form Name -->
+									<legend></legend>
 								
 									<!-- Text input-->
 									<div class="form-group">
@@ -111,7 +118,8 @@
 									</div>
 								
 									<div class="form-group">
-										<div class="col-md-3 pull-right">
+										<div class="col-md-5 pull-right">
+											<button type="button" class="btn btn-danger cancel">Cancel</button>
 											<button type="submit" class="btn btn-success save-calendar">Save</button>
 										</div>
 									</div>
@@ -142,6 +150,7 @@
 						    <form class="form-horizontal" id="template-form">
 								<fieldset>
 								
+									<div class="pull-right close-icon"><i class="fa fa-times" aria-hidden="true"></i></div>
 									<!-- Form Name -->
 									<legend></legend>
 									
@@ -174,6 +183,7 @@
 									  <label class="col-md-4 control-label" for="template-content">Template Content</label>
 									  <div class="col-md-7">                     
 									    <textarea class="form-control" id="template-content" name="template-content" rows="5">You have an appointment on (date) at (time) with Victoria Legal Aid. Location of appointment is at (location). To change call us on (phone).</textarea>
+									    <div class="char-box"><span>Characters remaining: </span><span id="char-count"></span></div>
 									    <span class="help-block">Tags:</span>  
 									    <button type="button" class="btn btn-primary btn-xs shortcut-tag">(date)</button>
 									    <button type="button" class="btn btn-primary btn-xs shortcut-tag">(time)</button>
@@ -184,7 +194,8 @@
 									</div>
 									
 									<div class="form-group">
-										<div class="col-md-3 pull-right">
+										<div class="col-md-5 pull-right">
+											<button type="button" class="btn btn-danger cancel">Cancel</button>
 											<button type="submit" class="btn btn-success save-template">Save</button>
 										</div>
 									</div>
@@ -206,7 +217,7 @@
 		
 		<footer class="footer">
 			<div class="container">
-				<p class="text-muted"><i class="fa fa-github" aria-hidden="true"></i> If you find an issue or just want to give us your feedback, please use this link. (<a href="https://github.com/CodeforAustralia/sms-notification-reminder/issues/" target="_blank">Link</a>)</p>
+				<p class="text-muted">Need help? Found an issue? <a href="mailto:christiana16@vla.vic.gov.au?subject=SMS Reminders Support"> Email the Helpdesk team for support.</a></p>
 			</div>
 		</footer>
 
