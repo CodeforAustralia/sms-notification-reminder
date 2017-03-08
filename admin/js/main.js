@@ -355,7 +355,7 @@ function validate_template_form(){
 			"template-phone": {
 				required: true,
 				minlength: 8,
-    			number: true
+        		pattern: /^[\d\s]+$/
 			},
 			"template-content": {
 				required: true
@@ -368,9 +368,9 @@ function validate_template_form(){
 				minlength: "Your abbreviation must be at least 5 characters long"
 			},
 			"template-phone": {
-				required: "Please enter a phone for this calendar",
+				required:  "Please enter a phone for this calendar",
 				minlength: "Your phone must be at least 9 characters long",
-				number: "Your phone must be a valid number"
+				pattern:   "Please enter digits or space characters only"
 			},
 			"template-content": {
 				required: "Please enter a description",
