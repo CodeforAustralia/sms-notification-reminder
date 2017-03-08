@@ -19,6 +19,7 @@
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/0.7.2/mustache.min.js"></script>
 		<script src="js/jquery-validation/jquery.validate.js"></script>
+		<script src="js/jquery-validation/additional-methods.js"></script>
 		<script src="js/main.js"></script>
 		
 		<script id="calendar-template" type="text/template">
