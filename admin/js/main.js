@@ -77,6 +77,7 @@ function add_template() {
 		$("#forms").html($("#template-form-container").html());
 		$("#forms").show();
 		validate_template_form();
+		enable_tooltips();
 		var content = $("#forms #template-content").val();
 		$("#forms #char-count").text(400 - content.length + substract_tags(content));
 	});
@@ -91,6 +92,7 @@ function open_edit_template() {
 		var template_info = __current_template = get_template_by_abbr($(this).attr("id"));
 		fill_template_window(template_info);
 		validate_template_form();
+		enable_tooltips();
 	});
 }
 

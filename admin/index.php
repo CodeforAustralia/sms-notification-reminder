@@ -185,11 +185,13 @@
 									    <textarea class="form-control" id="template-content" name="template-content" rows="5">You have an appointment on (date) at (time) with Victoria Legal Aid. Location of appointment is at (location). To change call us on (phone).</textarea>
 									    <div class="char-box"><span>Characters remaining: </span><span id="char-count"></span></div>
 									    <span class="help-block">Tags:</span>  
-									    <button type="button" class="btn btn-primary btn-xs shortcut-tag">(date)</button>
-									    <button type="button" class="btn btn-primary btn-xs shortcut-tag">(time)</button>
-									    <button type="button" class="btn btn-primary btn-xs shortcut-tag">(location)</button>
-									    <button type="button" class="btn btn-primary btn-xs shortcut-tag">(phone)</button>
-									    <button type="button" class="btn btn-primary btn-xs shortcut-tag">(name)</button>
+									    <button type="button" class="btn btn-primary btn-xs shortcut-tag" data-toggle="tooltip" title="Date of appointment">(date)</button>&nbsp;
+									    <button type="button" class="btn btn-primary btn-xs shortcut-tag" data-toggle="tooltip" title="Time of appointment">(time)</button>&nbsp;
+									    <button type="button" class="btn btn-primary btn-xs shortcut-tag" data-toggle="tooltip" title="Location of appointment">(location)</button>&nbsp;
+									    <button type="button" class="btn btn-primary btn-xs shortcut-tag" data-toggle="tooltip" title="Office number">(phone)</button>&nbsp;
+									    <br><br>
+									    <button type="button" class="btn btn-primary btn-xs shortcut-tag" data-toggle="tooltip" title="Client's name">(client_name)</button>&nbsp;
+									    <button type="button" class="btn btn-primary btn-xs shortcut-tag" data-toggle="tooltip" title="Show calendar's owner">(calendar_name)</button>
 									  </div>
 									</div>
 									
@@ -217,7 +219,7 @@
 		
 		<footer class="footer">
 			<div class="container">
-				<p class="text-muted">Need help? Found an issue? <a href="mailto:christiana16@vla.vic.gov.au?subject=SMS Reminders Support"> Email the Helpdesk team for support.</a></p>
+				<p class="text-muted">Need help? Found an issue? <a href="mailto:vla_fellows@codeforaustralia.org?subject=SMS Reminders Support"> Email the Helpdesk team for support.</a></p>
 			</div>
 		</footer>
 

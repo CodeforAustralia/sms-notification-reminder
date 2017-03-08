@@ -19,12 +19,13 @@ function parse_subject($event_in_calendar, $templates) {
         $output['phone']        = sanitize_phone($event_info[1]);
         $output['appt_date']    = $date_time['date'] . " " . $date_time['time'];
         $args = array(
-                        'templates' => $templates,
-                        'body'      => $body,
-                        'date'      => $date_time['date'],
-                        'time'      => $date_time['time'],
-                        'location'  => $location,
-                        'organizer' => $event_in_calendar['Organizer']['EmailAddress']['Name']
+                        'client_name' => $output['client_name'],
+                        'templates'   => $templates,
+                        'body'        => $body,
+                        'date'        => $date_time['date'],
+                        'time'        => $date_time['time'],
+                        'location'    => $location,
+                        'organizer'   => $event_in_calendar['Organizer']['EmailAddress']['Name']
                     ); 
         $event_obj = set_template($args);
         if($event_obj->name == "") {
@@ -100,6 +101,7 @@ function set_template($args) {
     $time      = $args['time'];
     $location  = $args['location'];
     $organizer = $args['organizer'];
+    $client_name = $args['client_name'];
     $output    = new stdClass();
     if(!empty($template)) {
         $output->content   = $template->content;
@@ -109,7 +111,8 @@ function set_template($args) {
         $output->content = str_replace("(date)", $date, $output->content);
         $output->content = str_replace("(time)", $time, $output->content);
         $output->content = str_replace("(location)", $location, $output->content);
-        $output->content = str_replace("(name)", $organizer, $output->content);
+        $output->content = str_replace("(calendar_name)", $organizer, $output->content);
+        $output->content = str_replace("(client_name)", $client_name, $output->content);
         
         $output->name = $template->name;
     }

@@ -71,8 +71,8 @@
 				  	<div id="calendar"></div>
 		      		<hr>
 					<ul class="nav nav-pills nav-stacked" id="calendar_list">
-						<li id="{{id}}"><a href="#">{{name}}</a></li>
 					</ul>
+					<!-- <div id="calendar-spinner"><i class="fa fa-spinner fa-spin" style="font-size:24px;margin-left: 40%;"></i></div> -->
 				</div>
 
 		    <div class="col-sm-9 main-section">
@@ -94,7 +94,7 @@
 		
 		<footer class="footer">
 			<div class="container">
-				<p class="text-muted">Need help? Found an issue? <a href="mailto:christiana16@vla.vic.gov.au?subject=SMS Reminders Support"> Email the Helpdesk team for support.</a></p>
+				<p class="text-muted">Need help? Found an issue? <a href="mailto:vla_fellows@codeforaustralia.org?subject=SMS Reminders Support"> Email the Helpdesk team for support.</a></p>
 			</div>
 		</footer>
 

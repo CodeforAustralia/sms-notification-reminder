@@ -309,7 +309,7 @@
         return $event;
     }
     
-    public static function validateEmailAccess($access_token, $user_email, $emails){
+    public static function validateEmailAccess($access_token, $user_email, $email){
       date_default_timezone_set('Australia/Melbourne');
       
       $today = date('Y-m-d');
@@ -323,15 +323,14 @@
       
       $emails_access = array();
       
-      foreach($emails as $email){
-        $getEventsUrl = self::$outlookApiUrl."/Users/" .$email->email . "/calendarview?".http_build_query($getEventsParameters); 
-        $api_call = self::makeApiCall($access_token, $user_email, "GET", $getEventsUrl);
-        if(!isset($api_call["errorNumber"]) || isset($api_call["value"])) {
-          error_log("Accesssing calendars: ". json_encode($api_call));
-          $emails_access[] = $email;
-        } 
-      }
-      array_unshift($emails_access, array('email' => $_SESSION['user_email'] , 'name' => 'Your Calendar'));
+      $getEventsUrl = self::$outlookApiUrl."/Users/" . $email['email'] . "/calendarview?".http_build_query($getEventsParameters); 
+      $api_call = self::makeApiCall($access_token, $user_email, "GET", $getEventsUrl);
+      if(!isset($api_call["errorNumber"]) || isset($api_call["value"])) {
+        error_log("Accesssing calendars: " . $email['email'] . " - ". json_encode($api_call));
+        $emails_access[] = $email;
+      } 
+      
+      //array_unshift($emails_access, array('email' => $_SESSION['user_email'] , 'name' => 'Your Calendar'));
       return $emails_access;
     }
   }

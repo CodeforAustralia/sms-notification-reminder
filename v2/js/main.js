@@ -96,18 +96,42 @@ function render_cards(cards) {
 	$(targetContainer).html(html);
 }
 
+function get_email_access(email){
+	var data_url = "/services/email_access.php";
+  	$.post( data_url, {type: 'validate-email', email: email})
+	  .done(function( data ) {
+	  	if(data.length > 0) {
+	  		
+		    var items = JSON.parse(data);
+	  		if(items.items.length > 0){
+		    	render_menu(items);
+	  		}
+	  		if($("#calendar_list li").length == 1) {
+	  			select_own_calendar();
+	  		}
+			
+	  	} else {
+	  		window.location = "/logout.php"; //Not logged in user
+	  	}
+   });
+}
+
+function select_own_calendar(){
+	selected_menu = $("#calendar_list li")[0].id;
+	$("#current-calendar").text($("#calendar_list li a")[0].text);
+	$("#calendar_list li").first().addClass("active");
+	get_events();
+}
 
 function get_menu(){
   	var data_url = "/services/email_access.php";
-  	$.post( data_url, {})
+  	$.post( data_url, {type: 'get-emails'})
 	  .done(function( data ) {
 	  	if(data.length > 0) {
-		    var items = JSON.parse(data);	    
-	    	render_menu(items);
-			selected_menu = $("#calendar_list li")[0].id;
-			$("#current-calendar").text($("#calendar_list li a")[0].text);
-			$("#calendar_list li").first().addClass("active");
-			get_events();
+	  		var emails = JSON.parse(data);
+	  		for(key in emails){
+				get_email_access(emails[key]);
+			}
 	  	} else {
 	  		window.location = "/logout.php"; //Not logged in user
 	  	}
@@ -120,7 +144,7 @@ function render_menu(items){
 
 	var html = Mustache.to_html(template, items);
 
-	$(targetContainer).html(html);
+	$(targetContainer).append(html);
 }
 
 function set_events() {
