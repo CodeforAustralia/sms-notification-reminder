@@ -63,7 +63,7 @@
 			    <li class="logout"><a class="active" href="/logout.php">Logout</a></li>
 			</ul>
 		</header>
-		<div class="container-fluid">
+		<div class="container-fluid main-container">
 		  <div class="row content"> 	
 				<div class="col-sm-3 sidenav">
 		  			<h3 id="current-calendar">Menu title #1</h3>
@@ -94,7 +94,7 @@
 		
 		<footer class="footer">
 			<div class="container">
-				<p class="text-muted">Need help? Found an issue? <a href="mailto:vla_fellows@codeforaustralia.org?subject=SMS Reminders Support"> Email the Helpdesk team for support.</a></p>
+				<p class="text-muted">Need help? Found an issue? <a href="mailto:vla_fellows@codeforaustralia.org?subject=SMS Reminders Support"> Email the Help desk team for support.</a></p>
 			</div>
 		</footer>
 

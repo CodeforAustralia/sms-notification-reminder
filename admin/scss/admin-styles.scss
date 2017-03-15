@@ -7,6 +7,11 @@ $white: #fff;
 $blue: #49b9e0;
 $green: #5cb85c;
 $bootstrap_grey: #ccc;
+
+html, body {
+  height:100%;
+}
+
 hr {
   margin-top: 10px;
   margin-bottom: 10px;
@@ -52,7 +57,17 @@ header {
       text-decoration: none;
   }
 }
+
+.main-container{
+  height: 87%;
+  .content{
+    height: 100%;
+  }
+}
+
 .main-section{
+  overflow-y: auto;
+  max-height: 100%;
   
   hr{
     margin: 0;
@@ -113,7 +128,7 @@ header {
 }
 
 /* Set height of the grid so .sidenav can be 100% (adjust if needed) */
-.row.content {height: 780px}
+/*.row.content {height: 620px}*/
 
 /* Set gray background color and 100% height */
 .sidenav {
@@ -135,8 +150,9 @@ header {
 .footer {    
     bottom: 0;
     width: 100%;
-    height: 60px;
-    background-color: #f5f5f5;
+    height: 6%;
+    background-color: $grey;
+    position: absolute;
 
 	.container {
 	    padding-right: 15px;
@@ -145,7 +161,7 @@ header {
 	    margin-left: auto;
 
 	    .text-muted {
-		    margin: 20px 0;
+		    margin: 10px 0;
 		}
 	}
 }

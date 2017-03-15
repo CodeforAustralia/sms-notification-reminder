@@ -1,16 +1,22 @@
 html, body {
   height: 100%; }
 
-hr {
-  margin-top: 10px;
-  margin-bottom: 10px; }
-
 header ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
   overflow: hidden;
   background-color: #333; }
+header li {
+  float: left; }
+header li:last-child {
+  float: right; }
+header li a {
+  display: block;
+  color: #fff;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none; }
 header span {
   font-size: 20px;
   color: #fff;
@@ -19,18 +25,6 @@ header span {
   text-transform: uppercase; }
 header .active {
   background-color: #961b4b; }
-header .admin-menu {
-  background-color: #5cb85c; }
-header li {
-  float: left; }
-header li:nth-last-of-type(-n+2) {
-  float: right; }
-header li a {
-  display: block;
-  color: #fff;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none; }
 
 .main-container {
   height: 87%; }
@@ -41,47 +35,43 @@ header li a {
   overflow-y: auto;
   max-height: 100%; }
   .main-section hr {
-    margin: 0;
-    width: 96.666%; }
-  .main-section .title {
-    padding-left: 8px; }
-  .main-section .add-plus {
-    color: #5cb85c; }
+    margin-top: 10px;
+    margin-bottom: 10px; }
+  .main-section .card-info {
+    font-size: 0.9em; }
+    .main-section .card-info .card-message {
+      padding-left: 5px; }
+  .main-section .client-info {
+    padding-top: 5px;
+    /*color:  $blue;*/
+    padding-left: 0px; }
+  .main-section .card-container {
+    padding: 7px 0;
+    border-bottom: 1px solid #e3e3e3; }
+  .main-section .card-container:nth-child(even) {
+    background: #f5f5f5; }
+  .main-section .check-all {
+    padding-left: 5px;
+    font-size: 0.8em; }
   .main-section .icon-label {
     font-size: 7px; }
   .main-section .top-buttons {
     padding-top: 10px;
     text-align: right; }
-  .main-section #calendar-form, .main-section #template-form {
-    display: none; }
-  .main-section .btn-grey {
-    background-color: #f5f5f5; }
-    .main-section .btn-grey:hover {
-      background-color: #ccc; }
-
-#forms {
-  display: none;
-  position: absolute;
-  top: 20%;
-  left: 30%;
-  padding: 30px 15px 0px;
-  z-index: 1002;
-  background-color: white; }
-  #forms .close-icon {
-    position: absolute;
-    left: 95%;
-    top: 7px;
-    color: #ccc; }
-    #forms .close-icon:hover {
-      color: black; }
-  #forms .char-box {
-    float: right;
-    padding-top: 10px;
-    font-size: 10px;
-    color: #ccc; }
+  .main-section .watermark-appt {
+    opacity: 0.5;
+    text-align: center;
+    margin-top: 20%; }
+  .main-section .watermark-appt-advise {
+    opacity: 0.5;
+    font-size: 12px;
+    margin: 5px;
+    margin-left: 31%; }
+  .main-section .watermark-appt-advise h3:first-child {
+    font-weight: bold; }
 
 /* Set height of the grid so .sidenav can be 100% (adjust if needed) */
-/*.row.content {height: 620px}*/
+/*.row.content {height: 780px}*/
 /* Set gray background color and 100% height */
 .sidenav {
   background-color: #f5f5f5;
@@ -92,6 +82,9 @@ header li a {
     text-align: center; }
     .sidenav #calendar .datepicker {
       display: inline-block; }
+  .sidenav #calendar_list {
+    overflow-y: scroll;
+    height: 200px; }
 
 .footer {
   bottom: 0;
@@ -116,4 +109,4 @@ header li a {
   .row.content {
     height: auto; } }
 
-/*# sourceMappingURL=admin-styles.css.map */
+/*# sourceMappingURL=styles-layout-2.css.map */

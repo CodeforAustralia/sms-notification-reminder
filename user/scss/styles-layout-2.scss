@@ -6,6 +6,10 @@ $wine: #961b4b;
 $white: #fff;
 $blue: #49b9e0;
 
+html, body {
+  height:100%;
+}
+
 header {  
   ul {
       list-style-type: none;
@@ -42,8 +46,16 @@ header {
       background-color: $wine;
   }
 }
-.main-section{
 
+.main-container{
+  height: 87%;
+  .content{
+    height: 100%;
+  }
+}
+.main-section{
+  overflow-y: auto;
+  max-height: 100%;
   hr {
     margin-top: 10px;
     margin-bottom: 10px;
@@ -121,15 +133,16 @@ header {
   }
   #calendar_list{
     overflow-y: scroll;
-    height: 210px;
+    height: 200px;
   }
 }
 
 .footer {    
     bottom: 0;
     width: 100%;
-    height: 60px;
-    background-color: #f5f5f5;
+    height: 6%;
+    background-color: $grey;
+    position: absolute;
 
 	.container {
 	    padding-right: 15px;
@@ -138,7 +151,7 @@ header {
 	    margin-left: auto;
 
 	    .text-muted {
-		    margin: 20px 0;
+		    margin: 10px 0;
 		}
 	}
 }

@@ -43,7 +43,7 @@
           header("Location: /admin/validate.php");
           die();
         } else {
-          header("Location: /v2");
+          header("Location: /user");
           die();
         }
       }

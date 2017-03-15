@@ -54,12 +54,12 @@
 	<body>
 		<header>
 			<ul>
-				<li><span><b>SMS</b> Reminder Admin</span></li>
+				<li><span><b>SMS</b> Reminders Admin</span></li>
 			    <li class="logout"><a class="active" href="/logout.php">Logout</a></li>
 			    <li class="admin-menu"><a href="/">Dashboard</a></li>
 			</ul>
 		</header>
-		<div class="container-fluid">
+		<div class="container-fluid main-container">
 		  <div class="row content"> 	
 				<div class="col-sm-3 sidenav">
 		  			<h3>Dashboard</h3>
@@ -220,7 +220,7 @@
 		
 		<footer class="footer">
 			<div class="container">
-				<p class="text-muted">Need help? Found an issue? <a href="mailto:vla_fellows@codeforaustralia.org?subject=SMS Reminders Support"> Email the Helpdesk team for support.</a></p>
+				<p class="text-muted">Need help? Found an issue? <a href="mailto:vla_fellows@codeforaustralia.org?subject=SMS Reminders Support"> Email the Help desk team for support.</a></p>
 			</div>
 		</footer>
 
