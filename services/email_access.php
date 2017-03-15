@@ -3,7 +3,8 @@
   require('../core/outlook2.php');
   require('../core/functions.php');
   
-  if(isset($_SESSION['access_token']) && $_SESSION['user_email']) { 
+  if(isset($_SESSION['access_token']) && isset( $_SESSION['user_email']) && 
+        isset($_SESSION['token_expires']) && $_SESSION['token_expires'] > time() ) {
     
       if (isset($_POST['type'])) {
       
@@ -27,5 +28,7 @@
             $access_calendars = OutlookService::validateEmailAccess($_SESSION['access_token'], $_SESSION['user_email'], $emails);
             echo json_encode(array('items' => $access_calendars));
       } 
-  } 
+  }  else {
+      echo json_encode(array("errorNumber" => 401));
+  }
   

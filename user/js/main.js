@@ -103,12 +103,21 @@ function get_email_access(email){
 	  	if(data.length > 0) {
 	  		
 		    var items = JSON.parse(data);
-	  		if(items.items.length > 0){
-		    	render_menu(items);
-	  		}
-	  		if($("#calendar_list li").length == 1) {
-	  			select_own_calendar();
-	  		}
+		    
+			if(items.hasOwnProperty('errorNumber')) {
+				switch(items.errorNumber) {
+				case 401: //unauthorized
+						window.location = "/logout.php";
+					break;
+				}
+			} else {
+		  		if(items.items.length > 0){
+			    	render_menu(items);
+		  		}
+		  		if($("#calendar_list li").length == 1) {
+		  			select_own_calendar();
+		  		}
+			}
 			
 	  	} else {
 	  		window.location = "/logout.php"; //Not logged in user
