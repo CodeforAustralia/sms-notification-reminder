@@ -127,6 +127,7 @@ function get_email_access(email){
 
 function select_own_calendar(){
 	selected_menu = $("#calendar_list li")[0].id;
+	$(".email").text($("#calendar_list li")[0].id); //set email on the top
 	$("#current-calendar").text($("#calendar_list li a")[0].text);
 	$("#calendar_list li").first().addClass("active");
 	get_events();

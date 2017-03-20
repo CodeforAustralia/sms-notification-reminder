@@ -23,8 +23,12 @@ header .admin-menu {
   background-color: #5cb85c; }
 header li {
   float: left; }
-header li:nth-last-of-type(-n+2) {
-  float: right; }
+  header li span {
+    color: #fff; }
+  header li .email {
+    font-size: 1em;
+    text-transform: lowercase;
+    margin-right: 10px; }
 header li a {
   display: block;
   color: #fff;
