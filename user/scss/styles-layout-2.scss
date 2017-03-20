@@ -21,11 +21,16 @@ header {
 
   li {
       float: left;
+      span{
+        color: $white;
+      }
+      .email{
+        font-size: 1em;
+        text-transform: lowercase;
+        margin-right: 10px;
+      }
   }
-  li:last-child {
-      float: right;
-  }
-
+  
   li a {
       display: block;
       color: $white;
