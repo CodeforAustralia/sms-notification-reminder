@@ -19,6 +19,7 @@
 *.rar
 *.tar
 *.zip
+*.map
 
 # Logs and databases #
 ######################
@@ -40,6 +41,8 @@ Thumbs.db
 ################
 
 /**/emails.txt
-/**/oauth2.php
-/**/calendars.json
-/**/templates.json
+core/oauth2.php
+core/authorize.php
+include_files/calendars.json
+include_files/templates.json
+v2/
