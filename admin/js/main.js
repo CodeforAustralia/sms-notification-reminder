@@ -294,8 +294,11 @@ function update_template(template){
 function delete_calendar(){
 	$("body").on("click", ".delete-calendar", function() {
 	    var email = $(this).attr("id");
-	    __calendars = remove_calendar(email);
-	    store_data('calendar');
+	    var validation_window = confirm("Do you really want to erase " + email + "?\n\nThis change cannot be undone.");
+	    if (validation_window == true) {
+		    __calendars = remove_calendar(email);
+		    store_data('calendar');
+	    } 
 	})
 }
 
@@ -310,8 +313,11 @@ function remove_calendar(email){
 function delete_template(){
 	$("body").on("click", ".delete-template", function() {
 	    var abbreviation = $(this).attr("id");
-	    __templates = remove_template(abbreviation);
-	    store_data('template');
+	    var validation_window = confirm("Do you really want to erase " + abbreviation + "?\n\nThis change cannot be undone.");
+	    if (validation_window == true) {
+		    __templates = remove_template(abbreviation);
+		    store_data('template');
+	    } 
 	})
 }
 
