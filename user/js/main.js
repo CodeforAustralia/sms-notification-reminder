@@ -111,12 +111,14 @@ function get_email_access(email){
 					break;
 				}
 			} else {
+			    	console.log("Trying to access : ");
+			    	console.log(email);
+			    	console.log(items);
 		  		if(items.items.length > 0){
 			    	render_menu(items);
-			    	console.log("Trying to access : " + email);
-		  		}
-		  		if($("#calendar_list li").length == 1) {
-		  			select_own_calendar();
+			    	if(items.items[0].name == "Your Calendar"){
+			    		select_own_calendar();		
+			    	}
 		  		}
 			}
 			
