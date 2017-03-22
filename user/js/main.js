@@ -103,7 +103,7 @@ function get_email_access(email){
 	  	if(data.length > 0) {
 	  		
 		    var items = JSON.parse(data);
-		    
+			
 			if(items.hasOwnProperty('errorNumber')) {
 				switch(items.errorNumber) {
 				case 401: //unauthorized
@@ -113,6 +113,7 @@ function get_email_access(email){
 			} else {
 		  		if(items.items.length > 0){
 			    	render_menu(items);
+			    	console.log("Trying to access : " + email);
 		  		}
 		  		if($("#calendar_list li").length == 1) {
 		  			select_own_calendar();
