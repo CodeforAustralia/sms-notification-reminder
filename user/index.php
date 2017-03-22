@@ -60,7 +60,7 @@
 
 			<ul>
 				<li><span><b>SMS</b> Reminders</span></li>
-			    <li class="logout pull-right"><a class="active" href="/logout.php">Logout</a></li>
+			    <li class="logout pull-right"><a class="active" href="/logout.php">Log Out</a></li>
 			    <li class="pull-right"><span class="email"></span></li>
 			</ul>
 		</header>

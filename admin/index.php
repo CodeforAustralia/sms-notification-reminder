@@ -55,7 +55,7 @@
 		<header>
 			<ul>
 				<li><span><b>SMS</b> Reminders Admin</span></li>
-			    <li class="logout pull-right"><a class="active" href="/logout.php">Logout</a></li>
+			    <li class="logout pull-right"><a class="active" href="/logout.php">Log Out</a></li>
 			    <li class="pull-right admin-menu"><a href="/">Dashboard</a></li>
 			    <li class="pull-right"><span class="email"><?= (isset($_SESSION['user_email']) ? $_SESSION['user_email'] : '' ); ?></span></li>
 			</ul>
