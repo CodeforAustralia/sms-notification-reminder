@@ -56,7 +56,6 @@ function get_events(){
   	$.post( data_url, { date: selected_date, email: selected_menu })
 	  .done(function( data ) {
 	    var cards = JSON.parse(data);			
-	    //console.log(cards);
 		if(cards.hasOwnProperty('errorNumber')) {
 			switch(cards.errorNumber) {
 			case 401: //unauthorized
@@ -111,13 +110,10 @@ function get_email_access(email){
 					break;
 				}
 			} else {
-			    	console.log("Trying to access : ");
-			    	console.log(email);
-			    	console.log(items);
 		  		if(items.items.length > 0){
 			    	render_menu(items);
 			    	if(items.items[0].name == "Your Calendar"){
-			    		select_own_calendar();		
+			    		select_own_calendar(items.items[0]);
 			    	}
 		  		}
 			}
@@ -128,11 +124,12 @@ function get_email_access(email){
    });
 }
 
-function select_own_calendar(){
-	selected_menu = $("#calendar_list li")[0].id;
-	$(".email").text($("#calendar_list li")[0].id); //set email on the top
-	$("#current-calendar").text($("#calendar_list li a")[0].text);
-	$("#calendar_list li").first().addClass("active");
+function select_own_calendar(item){
+	selected_menu = item.email; //global variable
+	$(".email").text(item.email); //set email on the top
+	$("#current-calendar").text(item.name);
+	var li_element = document.getElementById(item.email);
+	$(li_element).addClass("active");
 	get_events();
 }
 
@@ -182,7 +179,6 @@ function send_messages() {
 	        email:	   selected_menu
 	    },
 	    function(data, status){
-	        console.log("Data: " + data + "\nStatus: " + status);
 	        get_events();
 	        hide_loader();
 	        alert("The reminders were sent");

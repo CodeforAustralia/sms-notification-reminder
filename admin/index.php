@@ -56,14 +56,14 @@
 			<ul>
 				<li><span><b>SMS</b> Reminders Admin</span></li>
 			    <li class="logout pull-right"><a class="active" href="/logout.php">Log Out</a></li>
-			    <li class="pull-right admin-menu"><a href="/">Dashboard</a></li>
+			    <li class="pull-right admin-menu"><a href="/">Exit Admin</a></li>
 			    <li class="pull-right"><span class="email"><?= (isset($_SESSION['user_email']) ? $_SESSION['user_email'] : '' ); ?></span></li>
 			</ul>
 		</header>
 		<div class="container-fluid main-container">
 		  <div class="row content"> 	
 				<div class="col-sm-3 sidenav">
-		  			<h3>Dashboard</h3>
+		  			<h3>&nbsp;</h3>
 		      		<hr>
 					<ul class="nav nav-pills nav-stacked">
 						<li id="open-calendars" class="active"><a  data-toggle="tab" href="#home">Calendars</a></li>

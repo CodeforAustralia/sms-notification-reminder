@@ -10,6 +10,12 @@ html, body {
   height:100%;
 }
 
+input[type='checkbox'] {
+    height: 20px;
+    width: 20px;
+    margin-left: 15px;
+}
+
 header {  
   ul {
       list-style-type: none;
@@ -53,7 +59,8 @@ header {
 }
 
 .main-container{
-  height: 87%;
+  max-height: 92%;
+  height: 100%;
   .content{
     height: 100%;
   }
@@ -93,6 +100,11 @@ header {
 
   .icon-label{
     font-size: 7px;
+  }
+  
+  .message-check{
+    position: relative;
+    top: 15px;
   }
 
   .top-buttons{

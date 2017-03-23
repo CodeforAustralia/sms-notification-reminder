@@ -1,6 +1,11 @@
 html, body {
   height: 100%; }
 
+input[type='checkbox'] {
+  height: 20px;
+  width: 20px;
+  margin-left: 15px; }
+
 header ul {
   list-style-type: none;
   margin: 0;
@@ -31,7 +36,8 @@ header .active {
   background-color: #961b4b; }
 
 .main-container {
-  height: 87%; }
+  max-height: 92%;
+  height: 100%; }
   .main-container .content {
     height: 100%; }
 
@@ -59,6 +65,9 @@ header .active {
     font-size: 0.8em; }
   .main-section .icon-label {
     font-size: 7px; }
+  .main-section .message-check {
+    position: relative;
+    top: 15px; }
   .main-section .top-buttons {
     padding-top: 10px;
     text-align: right; }
