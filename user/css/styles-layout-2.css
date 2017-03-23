@@ -73,7 +73,7 @@ header .active {
     text-align: right; }
   .main-section .watermark-appt {
     opacity: 0.5;
-    text-align: center;
+    margin-left: 31%;
     margin-top: 20%; }
   .main-section .watermark-appt-advise {
     opacity: 0.5;
